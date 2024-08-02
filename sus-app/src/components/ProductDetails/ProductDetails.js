@@ -16,7 +16,7 @@ const ProductDetail = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await axios.get(`http://localhost:4000/api/products/${productID}`);
+        const response = await axios.get(`https://sustainability-connect-backend.onrender.com/api/products/${productID}`);
         setProduct(response.data);
         setLoading(false);
       } catch (err) {
@@ -36,7 +36,7 @@ const ProductDetail = () => {
     }
 
     try {
-      const response = await fetch('http://localhost:4000/api/cart/add', {
+      const response = await fetch('https://sustainability-connect-backend.onrender.com/api/cart/add', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ userId: user._id, productId: product._id, quantity: 1 })
@@ -63,7 +63,7 @@ const ProductDetail = () => {
     }
 
     try {
-      const response = await fetch('http://localhost:4000/api/cart/remove', {
+      const response = await fetch('https://sustainability-connect-backend.onrender.com/api/cart/remove', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ userId: user._id, productId: product._id })
