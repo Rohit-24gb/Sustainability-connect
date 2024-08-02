@@ -8,7 +8,7 @@ const RecyclableItems = () => {
     // Fetch data from the backend API
     const fetchData = async () => {
       try {
-        const response = await fetch('http://localhost:4000/api/recyclable-items');
+        const response = await fetch('https://sustainability-connect-backend.onrender.com/api/recyclable-items');
         const data = await response.json();
         setItems(data);
       } catch (error) {
