@@ -78,7 +78,7 @@ const ForgetPassword = () => {
     const navigate = useNavigate();
 
     const handleForgetPassword = async () => {
-        let result = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/auth/forget-password`, {
+        let result = await fetch(`http://localhost:4000/api/auth/forget-password`, {
             method: 'post',
             body: JSON.stringify({ email }),
             headers: {

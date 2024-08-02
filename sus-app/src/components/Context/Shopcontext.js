@@ -12,7 +12,7 @@ const ShopcontextProvider = (props) => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/products`);
+        const response = await axios.get(`http://localhost:4000/api/products`);
         setAllProducts(response.data);
       } catch (error) {
         console.error("Error fetching products:", error);
@@ -25,7 +25,7 @@ const ShopcontextProvider = (props) => {
   useEffect(() => {
     const fetchCartItems = async () => {
       try {
-        const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/cart`);
+        const response = await axios.get(`http://localhost:4000/api/cart`);
         setCartItems(response.data);
       } catch (error) {
         console.error("Error fetching cart items:", error);
@@ -39,7 +39,7 @@ const ShopcontextProvider = (props) => {
     try {
       setCartItems((prev) => ({ ...prev, [itemId]: (prev[itemId] || 0) + 1 }));
 
-      await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/cart/add`, { itemId });
+      await axios.post(`http://localhost:4000/api/cart/add`, { itemId });
     } catch (error) {
       console.error("Error adding to cart:", error);
     }
@@ -57,7 +57,7 @@ const ShopcontextProvider = (props) => {
         return newCart;
       });
 
-      await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/cart/remove`, { itemId });
+      await axios.post(`http://localhost:4000/api/cart/remove`, { itemId });
     } catch (error) {
       console.error("Error removing from cart:", error);
     }
