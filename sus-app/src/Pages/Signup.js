@@ -21,7 +21,7 @@ const SignUp = () => {
 
     const collectData = async () => {
         try {
-            let result = await fetch('projectibmskillsbuild07@gmail.com/api/users/register', {
+            let result = await fetch('https://sustainability-connect-backend.onrender.com/api/users/register', {
                 method: 'POST',
                 body: JSON.stringify({ name, email, password, phone, gender, city }),
                 headers: {
