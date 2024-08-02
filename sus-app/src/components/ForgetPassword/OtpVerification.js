@@ -79,7 +79,7 @@ const OtpVerification = () => {
     const email = location.state?.email; // Retrieve email from state
 
     const handleOtpVerification = async () => {
-        let result = await fetch(`http://localhost:4000/api/auth/verify-otp`, {
+        let result = await fetch(`https://sustainability-connect-backend.onrender.com/api/auth/verify-otp`, {
             method: 'post',
             body: JSON.stringify({ email, otp }),
             headers: {
