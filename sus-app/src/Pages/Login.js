@@ -16,7 +16,7 @@ const Login = () => {
         }
 
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(email)) {
+        if (!emailRegex.gmail(email)) {
             setError('Invalid email format');
             return;
         }
