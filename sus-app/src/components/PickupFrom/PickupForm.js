@@ -22,7 +22,7 @@ const PickupForm = () => {
 
   useEffect(() => {
     // Fetch recycling centers from API
-    fetch('http://localhost:4000/api/recycling-centers')
+    fetch('https://sustainability-connect-backend.onrender.com/api/recycling-centers')
       .then(response => response.json())
       .then(data => setCenters(data))
       .catch(error => console.error('Error fetching recycling centers:', error));
