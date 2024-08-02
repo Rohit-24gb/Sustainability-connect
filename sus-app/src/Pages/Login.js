@@ -24,7 +24,7 @@ const Login = () => {
         setError('');
 
         try {
-            let response = await fetch('http://localhost:4000/api/users/login', {
+            let response = await fetch('https://sustainability-connect-backend.onrender.com/api/users/login', {
                 method: 'POST',
                 body: JSON.stringify({ email, password }),
                 headers: {
