@@ -18,7 +18,7 @@ const MyOrders = () => {
       }
 
       try {
-        const response = await fetch(`http://localhost:4000/orders/${user._id}`);
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/orders/${user._id}`);
         const data = await response.json();
 
         if (response.ok) {

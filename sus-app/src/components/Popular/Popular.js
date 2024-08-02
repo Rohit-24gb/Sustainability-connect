@@ -12,7 +12,7 @@ const Popular = ({product}) => {
       // Fetch data from the API
       const fetchProducts = async () => {
          try {
-            const response = await axios.get('http://localhost:4000/api/products');
+            const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/products`);
             // Assuming the response data is an array of products
             setProducts(response.data.slice(0, 4)); // Display only the first 4 products
          } catch (error) {

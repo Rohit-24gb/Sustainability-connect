@@ -91,7 +91,7 @@ const ChangePassword = () => {
             return;
         }
 
-        let result = await fetch('http://localhost:4000/api/auth/change-password', {
+        let result = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/auth/change-password`, {
             method: 'post',
             body: JSON.stringify({ email, password }),
             headers: {

@@ -1,7 +1,7 @@
 import React from 'react'
 import Footer from '../components/Footer/Footer'
 import BackgroundImageWithCaptions from '../components/BackgroundImageWithCaptions/BackgroundImageWithCaptions'
-import backgroundImage from '../assets/bgcontact.jpg';
+import backgroundImage from '../assets/bacgroundcontact.png';
 import ContactInfo from '../components/ContactInfo/ContactInfo';
 import ContactForm from '../components/ContactForm/ContactFrom';
 

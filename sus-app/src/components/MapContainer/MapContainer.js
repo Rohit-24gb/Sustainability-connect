@@ -10,7 +10,7 @@ const MapContainer = () => {
 
   // Fetch data from the backend API
   useEffect(() => {
-    fetch('http://localhost:4000/api/recycling-centers')
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/api/recycling-centers`)
       .then(response => response.json())
       .then(data => setRecyclingCenters(data))
       .catch(error => console.error('Error fetching data:', error));

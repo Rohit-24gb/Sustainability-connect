@@ -21,7 +21,7 @@ const Cart = () => {
       }
 
       try {
-        const response = await fetch(`http://localhost:4000/api/cart/verify/${user._id}`);
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/cart/verify/${user._id}`);
         const data = await response.json();
         console.log('Cart data:', data);
         if (response.ok) {
@@ -68,7 +68,7 @@ const Cart = () => {
     const config = {
       method: "post",
       maxBodyLength: Infinity,
-      url: "http://localhost:4000/payment/orders",
+      url: `${process.env.REACT_APP_BACKEND_URL}/payment/orders`,
       headers: {
         'Content-Type': 'application/json'
       },
@@ -85,7 +85,7 @@ const Cart = () => {
   };
 
   const handleRazorpayScreen = async (orderData) => {
-    const res = await loadScript("https://checkout.razorpay.com/v1/checkout.js");
+    const res = await loadScript(`https://checkout.razorpay.com/v1/checkout.js`);
 
     if (!res) {
       alert("Razorpay SDK failed to load. Are you online?");
@@ -114,7 +114,7 @@ const Cart = () => {
         };
 
         try {
-          await axios.post('http://localhost:4000/payment/payment/complete', paymentDetails);
+          await axios.post(`${process.env.REACT_APP_BACKEND_URL}/payment/payment/complete`, paymentDetails);
           localStorage.setItem('onComplete', JSON.stringify(response));
           toast.success('Payment successful and order saved!');
           navigate('/success');
@@ -153,7 +153,7 @@ const Cart = () => {
     const requestBody = { userId: user._id, productId };
 
     try {
-      const response = await fetch('http://localhost:4000/api/cart/remove', {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/cart/remove`, {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(requestBody)
