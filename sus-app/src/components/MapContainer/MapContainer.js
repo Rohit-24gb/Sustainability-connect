@@ -10,7 +10,7 @@ const MapContainer = () => {
 
   // Fetch data from the backend API
   useEffect(() => {
-    fetch(`http://localhost:4000/api/recycling-centers`)
+    fetch(`https://sustainability-connect-backend.onrender.com/api/recycling-centers`)
       .then(response => response.json())
       .then(data => setRecyclingCenters(data))
       .catch(error => console.error('Error fetching data:', error));
