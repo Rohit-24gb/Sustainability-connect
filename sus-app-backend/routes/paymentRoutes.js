@@ -1,8 +1,9 @@
 const express = require('express');
-import dotenv from 'dotenv';
 const Razorpay = require('razorpay');
 const Order = require('../models/Order');
 const Payment = require('../models/Payment');
+const dotenv = require('dotenv')
+dotenv.config();
 
 const router = express.Router();
 
