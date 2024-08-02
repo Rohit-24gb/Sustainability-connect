@@ -1,4 +1,5 @@
 const express = require('express');
+import dotenv from 'dotenv';
 const Razorpay = require('razorpay');
 const Order = require('../models/Order');
 const Payment = require('../models/Payment');
@@ -7,8 +8,8 @@ const router = express.Router();
 
 router.post('/orders', async (req, res) => {
   const razorpay = new Razorpay({
-    key_id: "rzp_test_g7C8UJjqob4MJj",
-    key_secret: "knsjei5gWqtqJBHSGrHt1v7y"
+    key_id: process.env.RAZORPAY_KEY_ID,
+    key_secret: process.env.RAZORPAY_KEY_SECRET
   });
 
   const options = {
