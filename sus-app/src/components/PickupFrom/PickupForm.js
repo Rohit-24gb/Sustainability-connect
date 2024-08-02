@@ -36,7 +36,7 @@ const PickupForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    fetch('/api/schedule-pickup', {
+    fetch('https://sustainability-connect-front-end.onrender.com/api/schedule-pickup', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
