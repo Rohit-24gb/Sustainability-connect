@@ -1,0 +1,92 @@
+.recycling-center-detail {
+    width: 80%; /* Set width to 80% of the viewport */
+    background-color: #fff;
+    height: 100vh;
+    margin: 0 auto; /* Center the container horizontally */
+    padding: 20px;
+    box-sizing: border-box; /* Include padding in width */
+  }
+  
+  /* Flex container for image and details */
+  .detail-content {
+    display: flex; /* Align children horizontally */
+    gap: 20px; /* Space between image and details */
+    align-items: flex-start; /* Align items to the top */
+    flex-wrap: wrap; /* Wrap content on smaller screens */
+  }
+  
+  /* Image styling */
+  .recycling-center-image {
+    flex: 1 1 30%; /* Allow image to take up 30% of the container width */
+    max-height: 400px; /* Limit the max height of the image */
+    width: 100%; /* Ensure image width is responsive */
+    object-fit: cover; /* Maintain aspect ratio */
+  }
+  
+  /* Details section */
+  .details {
+    flex: 2 1 70%; /* Allow details to take up 70% of the container width */
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+  
+  /* Heading styling */
+  .details h1 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+  
+  /* Styling for detail items */
+  .details p {
+    margin: 10px 0;
+  }
+  
+  .details strong {
+    display: inline-block;
+    width: 120px; /* Set fixed width for labels */
+  }
+  
+  /* Links styling */
+  .details a {
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  .details a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Responsive styles */
+  @media (max-width: 768px) {
+    .recycling-center-detail {
+      width: 90%; /* Increase width to 90% on smaller screens */
+      padding: 10px; /* Reduce padding on smaller screens */
+    }
+  
+    .detail-content {
+      flex-direction: column; /* Stack image and details vertically on smaller screens */
+      gap: 10px; /* Reduce gap between image and details */
+    }
+  
+    .recycling-center-image {
+      width: 100%; /* Make image full width on smaller screens */
+      max-height: 300px; /* Reduce max height for smaller screens */
+    }
+  
+    .details {
+      flex: 1 1 auto; /* Allow details to take full width */
+    }
+  
+    .details h1 {
+      font-size: 1.5rem; /* Reduce font size for the heading */
+    }
+  
+    .details {
+      font-size: 0.875rem; /* Slightly smaller font size for details */
+    }
+  
+    .details strong {
+      width: auto; /* Remove fixed width on smaller screens */
+    }
+  }
+  

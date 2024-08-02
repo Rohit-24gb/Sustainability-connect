@@ -1,0 +1,90 @@
+/* PickupForm.css */
+
+.success-message {
+  color: green;
+  font-size: 1.2em;
+  margin-top: 10px;
+}
+
+.error-message {
+  color: red;
+  font-size: 1.2em;
+  margin-top: 10px;
+}
+
+.section {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    margin: 20px 0;
+  }
+  
+  .pickup-container {
+    text-align: center;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .pickup-container h2 {
+    margin-bottom: 20px;
+    color: #4CAF50;
+  }
+  
+  .pickup-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  .pickup-container form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    max-width: 400px;
+  }
+  
+  .pickup-container form input,
+  .pickup-container form select,
+  .pickup-container form button {
+    margin: 10px 0;
+    padding: 10px;
+    width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+  }
+  
+  .pickup-container form input:focus,
+  .pickup-container form select:focus {
+    border-color: #4CAF50;
+    outline: none;
+  }
+  
+  .pickup-container form button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .pickup-container form button:hover {
+    background-color: #45a049;
+  }
+  
+  .pickup-image {
+    flex: 1;
+    max-width: 400px;
+    margin-left: 70px;
+  }
+  
+  .pickup-image img {
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  

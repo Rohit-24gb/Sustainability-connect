@@ -1,0 +1,103 @@
+.Popular{
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   gap: 10px;
+   height: 90vh;
+}
+.Popular h1{
+   color:black;
+   font-size:50px;
+   font-weight: 600;
+}
+.Popular hr{
+   width: 200px;
+   height: 6px;
+   border-radius: 10px;
+   background-color: #575454;
+}
+.popular-item{
+   margin-top: 50PX;
+   display: flex;
+}
+@media(max-width:1280px)
+{
+
+   .Popular{
+      height: 70vh;
+   }
+   .Popular h1{
+      font-size: 40px;
+
+   }
+   .Popular hr{
+      width: 160px;
+      height: 4px;
+
+   }
+   .popular-item{
+      gap: 20px;
+      margin-top: 30px;
+   }
+
+}
+@media(max-width:1024px)
+{
+
+   .Popular{
+      height: 60vh;
+   }
+   .Popular h1{
+      font-size: 30px;
+
+   }
+   .Popular hr{
+      width: 120px;
+      height: 3px;
+
+   }
+   .popular-item{
+      gap: 15px;
+      margin-top: 20px;
+   }
+
+}
+@media(max-width:800px)
+{
+
+   .Popular{
+      height: 50vh;
+      gap: 6px;
+   }
+   .Popular h1{
+      font-size: 20px;
+
+   }
+   .Popular hr{
+      width: 100px;
+      
+
+   }
+   .popular-item{
+      gap: 6px;
+      
+
+   }
+   .Popular h1{
+      font-size: 20px;
+   }
+
+}
+@media(max-width:500px)
+{
+   .Popular{
+      height: 90vh;
+   }
+   .popular-item{
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+   }
+}
+
+

@@ -1,0 +1,120 @@
+/* Container for product detail */
+.product-detail-container {
+    display: flex;
+    width: 80%; /* Set width to 80% */
+    margin: 100px auto; /* Center the container and add top and bottom margin */
+    padding: 20px;
+    background-color: rgb(243, 243, 243);
+  }
+  
+  /* Carousel styling */
+  .product-carousel {
+    flex: 0 0 30%; /* Carousel takes 30% of the page width */
+    margin-right: 10%; /* 10% gap between carousel and details */
+  }
+  
+  .product-carousel-image {
+    width: 100%; /* Make image fill the container */
+    max-height: 500px; /* Optional: limit max height */
+    object-fit: cover; /* Maintain aspect ratio */
+  }
+  
+  /* Product detail styling */
+  .product-detail {
+    flex: 1; /* Allow details to take up available space */
+  }
+  
+  /* Title and description */
+  .product-detail-title {
+    font-size: 2rem;
+    margin: 10px 0;
+  }
+  
+  .product-detail-price {
+    font-size: 1.5rem;
+    color: #007bff;
+    margin: 10px 0;
+  }
+  
+  .product-detail-description {
+    font-size: 1rem;
+    margin: 10px 0;
+  }
+  
+  /* Button container */
+  .button-container {
+    display: flex;
+    gap: 10px; /* Space between buttons */
+    margin-top: 20px; /* Space above buttons */
+  }
+  
+  .add-to-cart-button,
+  .buy-now-button {
+    padding: 8px 16px; /* Adjust button padding */
+    border: none;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 1rem; /* Adjust button text size */
+  }
+  
+  .add-to-cart-button:hover,
+  .buy-now-button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Responsive Styles */
+  @media (max-width: 1200px) {
+    .product-carousel {
+      flex: 0 0 40%; /* Adjust carousel width for medium screens */
+      margin-right: 5%; /* Reduce gap */
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .product-detail-container {
+      flex-direction: column; /* Stack carousel and details vertically */
+      width: 90%; /* Increase width on smaller screens */
+    }
+  
+    .product-carousel {
+      flex: 0 0 100%; /* Carousel takes full width */
+      margin-right: 0; /* Remove gap */
+      margin-bottom: 20px; /* Add margin below carousel */
+    }
+  
+    .product-detail {
+      flex: 1;
+    }
+  
+    .button-container {
+      flex-direction: column; /* Stack buttons vertically */
+      gap: 10px; /* Space between buttons */
+    }
+  
+    .add-to-cart-button,
+    .buy-now-button {
+      width: 100%; /* Make buttons full width */
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .product-detail-title {
+      font-size: 1.5rem; /* Adjust title size */
+    }
+  
+    .product-detail-price {
+      font-size: 1.25rem; /* Adjust price size */
+    }
+  
+    .product-detail-description {
+      font-size: 0.875rem; /* Adjust description size */
+    }
+  
+    .add-to-cart-button,
+    .buy-now-button {
+      font-size: 0.875rem; /* Adjust button text size */
+    }
+  }
+  

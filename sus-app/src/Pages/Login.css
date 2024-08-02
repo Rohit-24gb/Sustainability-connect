@@ -1,0 +1,86 @@
+/* Login.css */
+.login-container {
+  /* margin-top: 100px; */
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.image-section {
+  margin-top: 140px;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image-section img {
+  max-width: 80%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.form-section {
+  margin-top: 140px;
+  flex: 1;
+  padding: 20px;
+}
+
+.page-title {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.error-message {
+  color: red;
+  margin-bottom: 10px;
+}
+
+.input-box {
+  width: 80%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.app-button {
+  width: 84%;
+  padding: 10px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: background-color 0.3s ease;
+}
+
+.app-button:hover {
+  background-color: #45a049;
+}
+
+@media (max-width: 768px) {
+  .login-container {
+      flex-direction: column;
+      align-items: stretch;
+  }
+
+  .image-section, .form-section {
+      flex: none;
+      width: 100%;
+  }
+
+  .image-section img {
+      max-width: 100%;
+      height: auto;
+      margin-bottom: 20px;
+  }
+}

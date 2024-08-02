@@ -1,0 +1,113 @@
+/* Shop-category.css */
+
+/* Centering the banner and setting its width */
+.shopcategory-banner {
+  display: block;
+  margin: 30px auto;
+  width: 80%; /* Adjusted to 80% */
+}
+
+/* Main container styling */
+.shop-category-container {
+  width: 80%; /* Main container width */
+  margin: 0 auto; /* Centering container */
+  text-align: center;
+  padding: 20px;
+}
+
+/* Banner styling */
+.shop-category-container img {
+  width: 100%;
+  max-height: 400px;
+  object-fit: cover;
+  margin-bottom: 20px;
+}
+
+/* Sort and count container */
+.info-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.info-container .sort-container {
+  margin: 0;
+}
+
+.info-container .sort-container label {
+  margin-right: 10px;
+}
+
+.info-container .sort-container select {
+  padding: 5px;
+}
+
+.info-container .product-count {
+  text-align: left;
+}
+
+/* Grid layout for products */
+.product-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Responsive grid layout */
+  gap: 20px;
+  justify-content: center; /* Default centering */
+}
+
+/* If there's only one product, align it to the left */
+.product-container.one-product {
+  justify-content: start; /* Aligns the single product to the left */
+}
+
+/* Style for individual product cards */
+.product-card {
+  box-sizing: border-box;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.product-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Pagination buttons */
+.pagination-buttons {
+  margin-top: 20px;
+}
+
+.pagination-buttons button {
+  padding: 10px 20px;
+  margin: 0 10px;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.pagination-buttons button:hover {
+  background-color: #0056b3;
+}
+
+/* Responsive styles */
+@media (max-width: 1200px) {
+  .product-container {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Adjust number of columns */
+  }
+}
+
+@media (max-width: 768px) {
+  .product-container {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Adjust number of columns */
+  }
+}
+
+@media (max-width: 480px) {
+  .product-container {
+    grid-template-columns: 1fr; /* Single column */
+  }
+}

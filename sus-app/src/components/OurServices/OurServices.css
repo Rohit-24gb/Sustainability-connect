@@ -1,0 +1,123 @@
+/* OurServices.css */
+
+/* Basic Styles */
+.ourservicesbg {
+  margin-top: 5.5rem;
+  background-size: cover;
+  color: #000000;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem;
+}
+
+.ourserviceimgheader {
+  padding-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.ourserviceimgheader img {
+  height: 30px;
+  width: 30px;
+}
+
+.ourserviceimgheader h2 {
+  color: black;
+  font-size: 25px;
+}
+
+.ourservice-content h1 {
+  font-size: 2.5rem;
+  margin: 1rem 0;
+}
+
+.ourserviceflex-item {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+  padding: 2rem 0;
+}
+
+.ourservice-product {
+  background-color: rgba(198, 195, 195, 0.507);
+  width: 340px;
+  text-align: center;
+  padding: 1rem;
+  border-radius: 1px;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.ourservice-product:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.ourservice-product img {
+  height: 250px;
+  width: 300px;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+  transition: transform 0.3s;
+}
+
+.ourservice-product img:hover {
+  transform: scale(1.05);
+}
+
+.ourservice-product p {
+  font-size: 20px;
+  color: black;
+  margin: 0.5rem 0;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .ourservice-content h1 {
+    font-size: 2rem;
+  }
+
+  .ourserviceimgheader h2 {
+    font-size: 20px;
+  }
+
+  .ourserviceflex-item {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .ourservice-product {
+    width: 80%;
+  }
+}
+
+@media (max-width: 480px) {
+  .ourservice-content h1 {
+    font-size: 1.5rem;
+  }
+
+  .ourserviceimgheader img {
+    height: 20px;
+    width: 20px;
+  }
+
+  .ourserviceimgheader h2 {
+    font-size: 18px;
+  }
+
+  .ourservice-product {
+    width: 80%;
+    margin: 1rem 0;
+  }
+
+  .ourservice-product img {
+    width: 100%;
+    height: auto;
+  }
+
+  .ourservice-product p {
+    font-size: 18px;
+  }
+}

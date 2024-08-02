@@ -1,0 +1,74 @@
+.environmental-card {
+    display: flex;
+    flex-wrap: wrap; /* Allow wrapping for responsiveness */
+    background-color: #fff;
+    /* border-radius: 8px; */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    max-width: 70%; /* Limit the width for better presentation */
+    margin: 20px auto;
+    margin-top: 100px;
+    margin-bottom: 100px;
+  }
+  
+  .image-container {
+    flex: 1;
+    min-width: 400px; /* Ensure image has a minimum width */
+  }
+  
+  .environmental-image {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  
+  .content-container {
+    flex: 2;
+    padding: 50px;
+    position: relative;
+  }
+  
+  .contact-us {
+    color: #4CAF50; /* Green color for 'Contact us' */
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+  }
+  
+  .title {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 15px;
+  }
+  
+  .description {
+    font-size: 1rem;
+    color: #555;
+    line-height: 1.5;
+    margin-bottom: 20px;
+  }
+  
+  .contact-button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .contact-button:hover {
+    background-color: #45a049;
+  }
+  
+  /* Responsive Styles */
+  @media (max-width: 768px) {
+    .environmental-card {
+      flex-direction: column; /* Stack vertically on smaller screens */
+    }
+  
+    .content-container {
+      padding: 15px;
+    }
+  }
+  

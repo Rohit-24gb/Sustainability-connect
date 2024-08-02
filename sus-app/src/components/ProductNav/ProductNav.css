@@ -1,0 +1,96 @@
+/* ProductNav.css */
+
+/* Base styles for the navbar */
+.product-nav {
+   display: flex;
+   flex-direction: column;
+   width: 100%;
+   background-color: #fff;
+   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+   position: relative;
+ }
+ 
+ .product-nav-header {
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   padding: 10px 20px;
+   background-color: #f5f5f5;
+ }
+ 
+ .product-nav-title {
+   margin: 0;
+ }
+ 
+ .product-nav-hamburger {
+   background: none;
+   border: none;
+   cursor: pointer;
+   padding: 0;
+ }
+ 
+ .product-nav-hamburger img {
+   width: 24px; /* Adjust the size as needed */
+   height: auto;
+ }
+ 
+ /* Menu styles */
+ .product-nav-menu {
+   display: none;
+   flex-direction: column;
+   width: 100%;
+   background-color: #fff;
+   position: absolute;
+   top: 60px; /* Adjust according to the height of your header */
+   left: 0;
+   z-index: 10;
+ }
+ 
+ .product-nav-menu-visible {
+   display: flex;
+ }
+ 
+ .nav-link {
+   display: block;
+   padding: 15px 20px;
+   text-decoration: none;
+   color: #333;
+   font-size: 1rem;
+   border-bottom: 1px solid #ddd;
+ }
+ 
+ .nav-link:hover {
+   background-color: #eee;
+ }
+ 
+ /* Responsive Styles */
+ @media (min-width: 768px) {
+   .product-nav {
+     flex-direction: row;
+     align-items: center;
+     justify-content: space-between;
+   }
+ 
+   .product-nav-header {
+     flex: 1;
+   }
+ 
+   .product-nav-hamburger {
+     display: none;
+   }
+ 
+   .product-nav-menu {
+     display: flex;
+     flex-direction: row;
+     position: static;
+     width: auto;
+     background-color: transparent;
+     flex: 1;
+   }
+ 
+   .nav-link {
+     padding: 10px 15px;
+     border-bottom: none;
+   }
+ }
+ 

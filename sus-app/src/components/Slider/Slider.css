@@ -1,0 +1,72 @@
+   .slide-container {
+    width: 100%;
+    height: 100vh; /* Set height to 90% of viewport height */
+    position: relative;
+  }
+  
+  .slide-container img {
+    width: 100%;
+    height: 90vh; /* Ensure the image takes up 90% of the viewport height */
+    object-fit: cover; /* Ensure images cover the area without distortion */
+  }
+  
+  .text-overlay {
+    position: absolute;
+    top: 35%;
+    left: 10%;
+    color: white;
+  }
+  
+  .common-text {
+    font-size: 30px;
+    width: fit-content; 
+  }
+
+  
+  .line1 {
+    font-size: 30px;
+    margin-top: -70px;
+    margin-bottom: 15px; 
+    color: white;
+  }
+  
+  .line2 {
+    font-size: 50px;
+  }
+
+  
+  .line2 span {
+    display: block; 
+  }
+  
+  
+  .slide-text {
+    font-size: 20px;
+    margin-top: 20px; 
+  }
+  
+  /* Dot Navigation Styling */
+  .react-slideshow-container .nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    bottom: 10px; 
+    width: 100%; 
+    pointer-events: none; 
+  }
+  
+  .react-slideshow-container .nav .dot {
+    background-color: rgba(0, 0, 0, 0.5); 
+    border-radius: 50%;
+    width: 12px;
+    height: 12px;
+    margin: 0 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .react-slideshow-container .nav .dot.active {
+    background-color: white; /* Color for the active dot */
+  }
+  

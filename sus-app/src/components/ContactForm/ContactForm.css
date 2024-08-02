@@ -1,0 +1,123 @@
+/* ContactForm.css */
+
+.contact-us-bg {
+    background-color: rgba(233, 163, 128, 0.514);
+    margin-top: 10%;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: stretch; 
+    margin-bottom: 10%;/* Ensure children have equal height */
+}
+
+.map, .contact-from {
+    flex: 1; /* Allow both map and form to take available space */
+    margin: 20px;
+    display: flex;
+    flex-direction: column; /* For the form */
+    justify-content: center; /* Center content vertically */
+}
+
+.map iframe {
+    width: 100%;
+    flex-grow: 1; /* Ensure iframe takes full height */
+}
+
+.contact-from {
+    max-width: 500px; /* Limit the width of the form */
+}
+
+.contact-from p {
+    font-size: 18px;
+    color: green;
+}
+
+.contact-from h2 {
+    font-size: 28px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.contact-from form {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; /* Ensure form grows to fill space */
+}
+
+form input,
+form textarea {
+    width: 100%; /* Full width inputs and textarea */
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+.button {
+    color: #fff;
+    font-size: 18px;
+    width: 100%;
+    padding: 15px;
+    margin: 20px 0;
+    border: none;
+    border-radius: 10px;
+    background-color: green;
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: darkgreen;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+    .contact-us-bg {
+        flex-direction: column; /* Stack vertically */
+        width: 90%;
+    }
+
+    .map, .contact-from {
+        margin: 10px;
+        width: 100%;
+    }
+
+    .contact-from p, .contact-from h2 {
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .contact-us-bg {
+        margin-top: 10%;
+    }
+
+    .map iframe {
+        height: 300px; /* Set a height for small screens */
+    }
+
+    .contact-from h2 {
+        font-size: 24px;
+    }
+
+    .contact-from p {
+        font-size: 16px;
+    }
+
+    .button {
+        font-size: 16px;
+        padding: 12px;
+    }
+}
+
+
+
+
+
+
+
+
+

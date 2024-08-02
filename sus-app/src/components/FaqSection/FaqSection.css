@@ -1,0 +1,115 @@
+/* FaqSection.css */
+
+.faq-section {
+  background-color: rgba(133, 226, 145, 0.2);
+  margin-top: 15%;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.faq-qus {
+  margin: 0 auto;
+  width: 80%;
+  text-align: justify;
+  display: flex;
+  flex-direction: column;
+}
+
+.faq-qus ul {
+  padding: 0;
+  list-style-type: none;
+}
+
+.faq-qus ul li {
+  margin-bottom: 20px;
+}
+
+.faq-qus button {
+  cursor: pointer;
+  text-decoration: none;
+  outline: none;
+  border: none;
+  background: none;
+  width: 100%;
+  text-align: left;
+  position: relative;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.faq-qus button:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+  transform: scale(1.02);
+}
+
+.faqQuestionSection {
+  font-size: 1.5rem;
+  color: black;
+  transition: color 0.3s ease;
+}
+
+.faqQuestionSection:hover {
+  color: #007BFF;
+}
+
+.inline {
+  background-color: red;
+  width: 100%;
+  height: 2px;
+  margin: 10px 0;
+  transition: background-color 0.3s ease;
+}
+
+.inline:hover {
+  background-color: darkred;
+}
+
+.faqans {
+  font-size: 1rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: black;
+  transition: opacity 0.3s ease;
+  opacity: 1;
+}
+
+.faqans.show {
+  opacity: 1;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .faq-section {
+    margin-top: 10%;
+  }
+
+  .faq-qus {
+    width: 90%;
+  }
+
+  .faqQuestionSection {
+    font-size: 1.3rem;
+  }
+
+  .faqans {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .faq-section {
+    margin-top: 8%;
+    padding: 10px;
+  }
+
+  .faq-qus {
+    width: 100%;
+  }
+
+  .faqQuestionSection {
+    font-size: 1.1rem;
+  }
+
+  .faqans {
+    font-size: 0.8rem;
+  }
+}

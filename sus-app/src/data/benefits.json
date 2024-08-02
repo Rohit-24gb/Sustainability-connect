@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "name": "Reduces Pollution",
+    "description": "Minimizes waste in landfills and reduces environmental pollution.",
+    "image": "/images/1.jpg"
+  },
+  {
+    "id": 2,
+    "name": "Conserves Resources",
+    "description": "Saves raw materials and conserves natural resources.",
+    "image": "/images/2.jpg"
+  },
+  {
+    "id": 3,
+    "name": "Saves Energy",
+    "description": "Uses less energy than producing new products from raw materials.",
+    "image": "/images/3.jpeg"
+  },
+  {
+    "id": 4,
+    "name": "Reduces Greenhouse Gases",
+    "description": "Helps reduce emissions of greenhouse gases.",
+    "image": "/images/4.avif"
+  },
+  {
+    "id": 5,
+    "name": "Creates Jobs",
+    "description": "Generates employment in the recycling and manufacturing industries.",
+    "image": "/images/5.jpg"
+  },
+  {
+    "id": 6,
+    "name": "Supports Sustainability",
+    "description": "Promotes the use of sustainable materials and practices.",
+    "image": "/images/6.jpg"
+  },
+  {
+    "id": 7,
+    "name": "Protects Wildlife",
+    "description": "Reduces the need for raw material extraction, preserving habitats and wildlife.",
+    "image": "/images/7.jpg"
+  },
+  {
+    "id": 8,
+    "name": "Economic Benefits",
+    "description": "Recycling can save money and generate revenue from recyclable materials.",
+    "image": "/images/8.jpg"
+  },
+  {
+    "id": 9,
+    "name": "Reduces Waste",
+    "description": "Decreases the amount of waste sent to landfills and incinerators.",
+    "image": "/images/9.jpg"
+  },
+  {
+    "id": 10,
+    "name": "Promotes Innovation",
+    "description": "Encourages the development of new, environmentally-friendly products and technologies.",
+    "image": "/images/10.webp"
+  },
+  {
+    "id": 11,
+    "name": "Improves Soil Health",
+    "description": "Using recycled organic materials can improve soil health and reduce erosion.",
+    "image": "/images/11.jpg"
+  },
+  {
+    "id": 12,
+    "name": "Reduces Water Pollution",
+    "description": "Lowers the risk of water pollution from waste disposal.",
+    "image": "/images/12.jpg"
+  },
+  {
+    "id": 13,
+    "name": "Saves Space",
+    "description": "Reduces the need for landfill space, conserving land for other uses.",
+    "image": "/images/13.jpg"
+  },
+  {
+    "id": 14,
+    "name": "Encourages Community Engagement",
+    "description": "Promotes community involvement and awareness about environmental issues.",
+    "image": "/images/14.jpg"
+  },
+  {
+    "id": 15,
+    "name": "Enhances Quality of Life",
+    "description": "Contributes to a cleaner, healthier environment, improving overall quality of life.",
+    "image": "/images/15.jpg"
+  },
+  {
+    "id": 16,
+    "name": "Supports Circular Economy",
+    "description": "Fosters a circular economy where resources are reused and recycled continuously.",
+    "image": "/images/16.jpg"
+  },
+  {
+    "id": 17,
+    "name": "Reduces Dependency on Imports",
+    "description": "Lessens the need to import raw materials, enhancing national resource security.",
+    "image": "/images/17.jpg"
+  },
+  {
+    "id": 18,
+    "name": "Promotes Responsible Consumption",
+    "description": "Encourages consumers to make more environmentally responsible purchasing decisions.",
+    "image": "/images/18.png"
+  }
+]

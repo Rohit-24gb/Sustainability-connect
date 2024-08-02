@@ -1,0 +1,125 @@
+.row {
+  width: 80%;
+  height: 50%;
+  margin-top: 100px;
+  margin-left: 16%;
+  display: flex;
+  margin-bottom: 200px;
+}
+
+
+.left-image {
+  width: 40%;
+  height: 400px;
+  object-fit: cover;
+
+}
+
+.left-image img {
+  width: px;
+  height: 450px;
+  object-fit: cover;
+
+}
+
+.right-image {
+  width: 44%;
+  height: 450px;
+
+  background-color: rgb(255, 255, 255);
+
+}
+
+
+.p {
+  font-size: 24px;
+  font-weight: 500;
+  color: rgb(110, 237, 110);
+  margin: 0;
+  padding: 20px;
+  padding-top: 30px;
+  gap: 50px;
+  padding-left: 20px;
+}
+
+
+
+.line11 {
+
+  padding-left: 35px;
+  color: black;
+  font-weight: 400;
+  font-weight: 500;
+  font-weight: bold;
+  width: 308px;
+  height: 76px;
+}
+
+.line22 {
+  font-weight: 500;
+  color: black;
+  display: block;
+  padding-left: 35px;
+  width: fit-content;
+  font-weight: bold;
+
+
+}
+
+.line3 {
+  color: black;
+}
+
+.titletext img {
+  width: 40px;
+  height: 35px;
+  float: right;
+  padding-top: 25px;
+  padding-right: 35px;
+}
+
+
+
+.subtitle .p3 {
+  font-size: 20px;
+  padding-left: 32px;
+  font-weight: 350;
+
+  display: block;
+  margin: 0;
+  /* This removes default paragraph margins */
+  line-height: 1.5;
+  /* Optional: Adjust line height if needed */
+}
+
+
+
+
+.btn {
+  display: inline-block;
+  padding: 15px 20px;
+  margin-left: 32px;
+  margin-top: 21px;
+  font-size: 20px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: #8db600;
+  border: none;
+  border-radius: 45px;
+  width: 100px;
+  height: 15px;
+}
+
+.img3 img {
+  width: 243px;
+  height: 298px;
+  float: right;
+  margin-top: 200px;
+
+
+
+}
+

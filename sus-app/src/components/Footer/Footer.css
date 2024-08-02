@@ -1,0 +1,141 @@
+/* Base styles */
+.footer {
+  background: url('../../assets/footer-bg.jpg') no-repeat center center;
+  background-size: cover;
+  padding: 50px 0;
+  color: #fff;
+}
+
+.footer-social {
+  text-align: center;
+  padding: 20px 0;
+  margin-left: 10%;
+  width: 80%;
+}
+
+.social-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: #65b534;
+  border-radius: 10px;
+}
+
+.social-content h2 {
+  margin: 0;
+  font-size: 24px;
+}
+
+.social-icons {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.social-icon {
+  width: 30px;
+  height: 30px;
+}
+
+.footer-content {
+  width: 80%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.footer-column {
+  flex: 1;
+  min-width: 200px; /* Ensure minimum width for columns */
+  margin: 10px;
+}
+
+.footer-column img {
+  width: 15px;
+  height: 15px;
+  padding-right: 10px;
+  margin-top: 5px;
+}
+
+.footer-column h3 {
+  margin-bottom: 10px;
+  font-size: 20px;
+}
+
+.footer-column p {
+  margin: 5px 0;
+  font-size: 16px;
+}
+
+.footer-column input[type="email"] {
+  padding: 10px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 5px;
+  width: calc(100% - 80px);
+  height: 30px;
+}
+
+.footer-column button {
+  padding: 10px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #4CAF50;
+  color: #fff;
+  cursor: pointer;
+}
+
+.footer-column button:hover {
+  background-color: #65b534;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .social-content {
+      flex-direction: column;
+      gap: 10px;
+  }
+
+  .footer-column {
+      min-width: 100%;
+      flex: none;
+      margin: 10px 0;
+  }
+
+  .footer-column h3 {
+      font-size: 18px;
+  }
+
+  .footer-column p, .footer-column input[type="email"] {
+      font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer {
+      padding: 30px 0;
+  }
+
+  .social-content h2 {
+      font-size: 18px;
+  }
+
+  .footer-column h3 {
+      font-size: 16px;
+  }
+
+  .footer-column p, .footer-column input[type="email"] {
+      font-size: 12px;
+  }
+
+  .footer-column input[type="email"] {
+      width: calc(100% - 20px);
+  }
+}
+
+
+

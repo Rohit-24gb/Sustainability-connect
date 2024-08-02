@@ -1,0 +1,75 @@
+/* Hero.css */
+
+.hero-container {
+  position: relative;
+  width: 100%;
+  height: 40vh; /* Adjust height as needed */
+  background: url('../../assets/img1.jpg') no-repeat center center/cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-background {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.stats-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 80%; /* Adjust based on your design */
+  max-width: 1200px; /* Adjust based on your design */
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  max-width: 150px;
+}
+
+.stat-item img {
+  width: 50px;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+.stat-item span {
+  font-size: 1rem;
+  color: #333;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .stats-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .stat-item {
+    margin-bottom: 20px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .stats-container {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .stat-item {
+    margin-bottom: 0;
+  }
+}

@@ -1,0 +1,96 @@
+/* ContactInfo.css */
+
+.contact-info-banner {
+    width: 80%;
+    margin: 40px auto 20px; /* Increased top margin */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #fff;
+    background-image: url('../../assets/ourservice-bg.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.contact-way {
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    margin: 10px;
+    border-radius: 10px;
+    flex: 1 1 200px;
+    max-width: 300px;
+    text-align: center;
+}
+
+.contact-banner-img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 100px;
+    background-color: #fff;
+    border-radius: 50%;
+    margin: 0 auto 10px auto;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.contact-banner-img img {
+    width: 50%;
+    height: 50%;
+}
+
+.first-header {
+    font-size: 24px;
+    margin: 10px 0;
+}
+
+.sec-header {
+    font-size: 16px;
+}
+
+@media (max-width: 768px) {
+    .contact-info-banner {
+        padding: 10px;
+        margin: 10px auto;
+    }
+
+    .contact-way {
+        padding: 15px;
+        margin: 5px;
+    }
+
+    .first-header {
+        font-size: 22px;
+    }
+
+    .sec-header {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .contact-info-banner {
+        padding: 5px;
+        margin: 5px auto;
+    }
+
+    .contact-way {
+        padding: 10px;
+        margin: 5px;
+    }
+
+    .first-header {
+        font-size: 20px;
+    }
+
+    .sec-header {
+        font-size: 12px;
+    }
+}
+
+
+

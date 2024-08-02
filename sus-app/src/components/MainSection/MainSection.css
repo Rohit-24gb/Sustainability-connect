@@ -1,0 +1,143 @@
+/* MainSection.css */
+
+.container-context {
+  display: flex;
+  flex-wrap: wrap;
+  background-color: rgb(255, 255, 255);
+  margin: 5% 10% 100px 10%;
+  padding: 15px;
+}
+
+.bgimg {
+  background-color: rgb(96, 228, 96);
+  width: 100%;
+  max-width: 360px;
+  height: 400px;
+  margin: auto;
+  /* margin-left: 50px; */
+
+}
+
+.bg-img {
+  width: 100%;
+  height: auto;
+  max-height: 450px;
+  /* margin: 15px auto; */
+  margin-top: 15px;
+  margin-left: 15px;
+  display: block;
+}
+
+.container-context-item {
+  flex: 1;
+  margin: 2rem 5%;
+  min-width: 300px;
+}
+
+.heading-first {
+  font-size: 2.5rem;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+.sub-heading-first {
+  font-size: 2rem;
+}
+
+.sub-heading {
+  text-align: justify;
+  font-size: 1rem;
+  margin-top: -15px;
+}
+
+.main-menu {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.main-menu img {
+  width: 50px;
+  height: 50px;
+}
+
+.handleaf-img {
+  margin-left: 10px;
+}
+
+.main-menu p {
+  margin-left: 15px;
+  font-size: 1rem;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .container-context {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+
+  .bgimg {
+    background-color: rgb(96, 228, 96);
+    width: 100%;
+    max-width: 360px;
+    height: 340px;
+    margin: auto;
+    /* margin-left: 50px; */
+  
+  }
+
+  .container-context-item {
+    margin-left: 0;
+  }
+
+  .heading-first {
+    font-size: 2rem;
+  }
+
+  .sub-heading-first {
+    font-size: 1.5rem;
+  }
+
+  .sub-heading {
+    font-size: 0.9rem;
+  }
+
+  .main-menu p {
+    margin-left: 5px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .container-context {
+    margin: 5% 5% 50px 5%;
+  }
+
+  .bg-img {
+    width: 100%;
+    max-height: 400px;
+  }
+
+  .heading-first {
+    font-size: 1.5rem;
+  }
+
+  .sub-heading-first {
+    font-size: 1.2rem;
+  }
+
+  .sub-heading {
+    font-size: 0.8rem;
+  }
+
+  .main-menu img {
+    width: 40px;
+    height: 40px;
+  }
+
+  .main-menu p {
+    font-size: 0.8rem;
+  }
+}

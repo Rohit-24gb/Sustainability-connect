@@ -1,0 +1,66 @@
+.marquee-container {
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  position: relative;
+  background-color: #8db600;
+  padding: 20px;
+  margin-top: -72px;
+}
+
+.marquee-content {
+  display: inline-block;
+  animation: marquee 15s linear infinite;
+}
+
+.marquee-item {
+  display: inline-flex;
+  align-items: center;
+  margin-right: 30px;
+  color: #ffffff;
+  justify-content: center;
+  font-size: 25px;
+}
+
+.rotating-image {
+  width: 30px;
+  height: 30px;
+  margin-left: 10px;
+  animation: rotate 2s linear infinite;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Adding the delay at the end of the animation */
+.marquee-content::after {
+  content: '';
+  display: inline-block;
+  width: 100%;
+  animation: delayStep 10s linear infinite;
+}
+
+@keyframes delayStep {
+  0%, 95% {
+    content: '';
+  }
+  100% {
+    content: ' ';
+    animation-delay: 1s; /* Adds 1 second delay at the end of each cycle */
+  }
+}

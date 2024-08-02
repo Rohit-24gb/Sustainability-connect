@@ -1,0 +1,47 @@
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  background-color: #d8dadd;
+  align-items: center;
+}
+
+
+.nav-left, .nav-right {
+  display: flex;
+  align-items: center;
+}
+
+.nav-item {
+  margin: 0 10px;
+  display: flex;
+  align-items: center;
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+}
+
+.nav-right span {
+  margin-right: 10px;
+  font-size: 15px;
+  color: #000;
+}
+
+
+@media (max-width: 768px) {
+  .nav {
+      display: none;
+  }
+}
+
+
