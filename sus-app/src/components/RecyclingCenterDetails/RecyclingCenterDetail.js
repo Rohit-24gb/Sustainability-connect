@@ -12,7 +12,7 @@ const RecyclingCenterDetail = () => {
   useEffect(() => {
     const fetchCenterDetails = async () => {
       try {
-        const response = await axios.get(`http://localhost:4000/api/recycling-centers/${centerID}`);
+        const response = await axios.get(`https://sustainability-connect-backend.onrender.com/api/recycling-centers/${centerID}`);
         setCenter(response.data);
         setLoading(false);
       } catch (err) {
