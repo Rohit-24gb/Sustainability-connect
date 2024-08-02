@@ -14,7 +14,7 @@ const ShopCategory = ({ banner, categoryID }) => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get(`http://localhost:4000/api/products/category/${categoryID}`);
+        const response = await axios.get(`https://sustainability-connect-backend.onrender.com/api/products/category/${categoryID}`);
         setProducts(response.data);
         setDisplayedProducts(response.data.slice(0, showCount));
         setLoading(false);
