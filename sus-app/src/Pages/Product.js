@@ -17,6 +17,7 @@ import household_banner from "../assets/household_banner.png";
 import cleaning_banner from "../assets/cleaning_banner.png";
 import technology_banner from "../assets/technology_banner.png";
 import RecycleableItems from '../components/RecycleableItems/RecycleableItems'
+import Popular from '../components/Popular/Popular'
 
 const ProductPage = () => {
 
@@ -85,7 +86,7 @@ const ProductPage = () => {
         />
 
       </Routes>
-
+      <Popular />
       <RecycleableItems/>
       <Newsletter />
       <Footer />
