@@ -1,8 +1,6 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import Slider from 'react-slick';
-import { Shopcontext } from '../Context/Shopcontext';
 import './ProductDetails.css';
 import { toast } from 'react-toastify';
 
@@ -11,7 +9,6 @@ const ProductDetail = () => {
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  // const { addToCart } = useContext(Shopcontext);
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -85,46 +82,28 @@ const ProductDetail = () => {
   if (error) return <p>Error: {error}</p>;
   if (!product) return <p>Product Not Found</p>;
 
-  const images = Array.isArray(product.images) ? product.images : [];
-
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-  };
+  const image = product.image_url && product.image_url.length > 0 ? product.image_url[0] : null;
 
   return (
     <div className="product-detail-container">
-      <div className="product-carousel">
-        <Slider {...settings}>
-          {images.length > 0 ? (
-            images.map((image, index) => (
-              <div key={index}>
-                <img src={image} alt={`Product ${index}`} className="product-carousel-image" />
-              </div>
-            ))
-          ) : (
-            <p>No images available</p>
-          )}
-        </Slider>
-      </div>
-      <div className="product-detail">
-        <h1 className="product-detail-title">{product.name}</h1>
-        <p className="product-detail-price">${product.price}</p>
-        <p className="product-detail-description">{product.description}</p>
+      <div className="product-image-container">
+        {image ? (
+          <img src={image} alt={product.name} className="product-main-image" />
+        ) : (
+          <p>No image available</p>
+        )}
         <div className="button-container">
           <button className="add-to-cart-button" onClick={handleAddToCart}>Add to Cart</button>
-          {/* <button className="remove-from-cart-button" onClick={handleRemoveFromCart}>Remove from Cart</button> */}
           <button className="buy-now-button">Buy Now</button>
         </div>
+      </div>
+      <div className="product-details-info">
+        <h1 className="product-detail-title">{product.name}</h1>
+        <p className="product-detail-price">₹ {product.price}</p>
+        <p className="product-detail-description">{product.description}</p>
       </div>
     </div>
   );
 };
 
 export default ProductDetail;
-
-
-
