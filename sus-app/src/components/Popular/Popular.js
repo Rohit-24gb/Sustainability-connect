@@ -11,7 +11,7 @@ const PopularProducts = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get('http://localhost:4000/api/products');
+        const response = await axios.get('https://sustainability-connect-backend.onrender.com/api/products');
         // Limit to the first 8 products
         setProducts(response.data.slice(0, 8));
         setLoading(false);
