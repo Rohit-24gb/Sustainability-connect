@@ -35,7 +35,7 @@ const PopularProducts = () => {
             <Link to={`/product/${product.productID}`}>
               <img src={product.image_url[0]} alt={product.name} className="product-image-popular" />
               <h3 className="product-name">{product.name}</h3>
-              <p className="product-price">${product.price}</p>
+              <p className="product-price">₹ {product.price}</p>
             </Link>
           </div>
         ))}
