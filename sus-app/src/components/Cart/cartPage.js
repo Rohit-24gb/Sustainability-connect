@@ -69,7 +69,7 @@ const Cart = () => {
     const config = {
       method: "post",
       maxBodyLength: Infinity,
-      url: `https://sustainability-connect-backend.onrender.com/payment/orders`,
+      url: `https://sustainability-connect-backend.onrender.com/v1/orders`,
       headers: {
         'Content-Type': 'application/json'
       },
@@ -116,7 +116,7 @@ const Cart = () => {
         };
 
         try {
-          await axios.post(`https://sustainability-connect-backend.onrender.com/payment/payment/complete`, paymentDetails);
+          await axios.post(`https://sustainability-connect-backend.onrender.com/v1/payment/complete`, paymentDetails);
           localStorage.setItem('onComplete', JSON.stringify(response));
           toast.success('Payment successful and order saved!');
           navigate('/success');
