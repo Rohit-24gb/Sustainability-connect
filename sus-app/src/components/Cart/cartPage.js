@@ -95,7 +95,7 @@ const Cart = () => {
     }
 
     const options = {
-      key: "rzp_test_g7C8UJjqob4MJj",
+      key: "rzp_test_aV0I2cItt4TFIk",
       amount: orderData.amount,
       currency: 'INR',
       name: "Sustainability Connect",
