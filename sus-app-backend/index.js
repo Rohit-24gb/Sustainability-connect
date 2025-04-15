@@ -51,7 +51,7 @@ app.use('/api/auth', OtpRoutes);
 app.use('/api/cart', CartRoutes);
 // app.use('/payment', PaymentRoutes)
 app.use(bodyParser.json());
-app.use('/payment', paymentRoutes);
+app.use('/v1', paymentRoutes);
 app.use('/orders', orderRoutes);
 
 
