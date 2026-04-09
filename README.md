@@ -86,7 +86,8 @@ This project is licensed under the MIT License.
 
 ## 📞 Contact
 
-* 📧 Email: [suryakantmani28@gmail.com](mailto:suryakantmani28@gmail.com)
+* 📧 Email:
+[rohitrajaksnd@gmail.com](mailto: rohitrajaksnd@gmail.com) [suryakantmani28@gmail.com](mailto:suryakantmani28@gmail.com)
 
 
 
