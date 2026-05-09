@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './RecycleableItems.css';
+import { API_BASE_URL } from "../../config/api";
 
 const RecyclableItems = () => {
   const [items, setItems] = useState([]);
@@ -8,7 +9,7 @@ const RecyclableItems = () => {
     // Fetch data from the backend API
     const fetchData = async () => {
       try {
-        const response = await fetch('https://sustainability-connect-backend.onrender.com/api/recyclable-items');
+        const response = await fetch(`${API_BASE_URL}/api/recyclable-items`);
         const data = await response.json();
         setItems(data);
       } catch (error) {
@@ -87,5 +88,4 @@ export default RecyclableItems;
 // };
 
 // export default RecyclableItems;
-
 

@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Login.css';
 import loginImage from '../assets/LeftPaneImageForLogin.png'; // Replace with the actual path to your image
+import { API_BASE_URL } from "../config/api";
 
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
     const handleLogin = async () => {
@@ -15,17 +17,18 @@ const Login = () => {
             return;
         }
 
-        const gmailRegex = /^[^\s@]+@gmail\.com$/;
-        if (!gmailRegex.test(email)) {
-        setError('Invalid Gmail address');
-        return;
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            setError('Invalid email address');
+            return;
         }
 
 
         setError('');
+        setLoading(true);
 
         try {
-            let response = await fetch('https://sustainability-connect-backend.onrender.com/api/users/login', {
+            const response = await fetch(`${API_BASE_URL}/api/users/login`, {
                 method: 'POST',
                 body: JSON.stringify({ email, password }),
                 headers: {
@@ -33,21 +36,23 @@ const Login = () => {
                 }
             });
 
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
+            const result = await response.json();
 
-            let result = await response.json();
-
-            if (result.success) {
+            if (response.ok && result.success) {
                 localStorage.setItem("user", JSON.stringify(result.user));
+                localStorage.setItem("token", result.accessToken || result.token);
+                if (result.refreshToken) {
+                    localStorage.setItem("refreshToken", result.refreshToken);
+                }
                 navigate('/');
             } else {
-                setError('Invalid email or password');
+                setError(result.message || result.result || 'Invalid email or password');
             }
         } catch (error) {
             console.error('Login failed:', error);
-            setError('Login failed, please try again later');
+            setError(`Could not connect to the backend at ${API_BASE_URL}. Please start the backend server.`);
+        } finally {
+            setLoading(false);
         }
     }
 
@@ -73,7 +78,9 @@ const Login = () => {
                     onChange={(e) => setPassword(e.target.value)}
                     value={password}
                 />
-                <button onClick={handleLogin} className="app-button" type="button">Login</button>
+                <button onClick={handleLogin} className="app-button" type="button" disabled={loading}>
+                    {loading ? 'Logging in...' : 'Login'}
+                </button>
                 <p><a href="/forget-password">Forget Password?</a></p>
             </div>
         </div>
@@ -163,8 +170,3 @@ export default Login;
 // }
 
 // export default Login;
-
-
-
-
-

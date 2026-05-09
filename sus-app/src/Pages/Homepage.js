@@ -2,6 +2,7 @@ import React from 'react'
 import MarqueeWithImages from '../components/MarqueeImage/MarqueeWithImages';
 import Slideshow from '../components/Slider/Slideshow';
 import MainSection from '../components/MainSection/MainSection';
+import RecommendedProducts from '../components/Recommendations/RecommendedProducts';
 import OurServices from '../components/OurServices/OurServices';
 import FaqSection from '../components/FaqSection/FaqSection';
 import ContactMainPage from '../components/ContactMainPage.js/ContactMainPage'
@@ -31,6 +32,7 @@ const Homepage = () => {
             <Slideshow/>
             <MarqueeWithImages texts={texts} delay={1000} />
             <MainSection/>
+            <RecommendedProducts/>
             <OurServices/>
             <FaqSection/>
             <ContactMainPage/>

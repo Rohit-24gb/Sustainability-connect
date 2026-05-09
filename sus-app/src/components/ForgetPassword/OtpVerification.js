@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useLocation, useNavigate } from 'react-router-dom';
 import backgroundImage from '../../assets/forget.jpg'; 
+import { API_BASE_URL } from "../../config/api";
 
 const Container = styled.div`
   display: flex;
@@ -79,7 +80,7 @@ const OtpVerification = () => {
     const email = location.state?.email; // Retrieve email from state
 
     const handleOtpVerification = async () => {
-        let result = await fetch(`https://sustainability-connect-backend.onrender.com/api/auth/verify-otp`, {
+        let result = await fetch(`${API_BASE_URL}/api/auth/verify-otp`, {
             method: 'post',
             body: JSON.stringify({ email, otp }),
             headers: {

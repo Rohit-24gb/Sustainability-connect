@@ -1,5 +1,6 @@
 const Cart = require('../models/Cart');
 const Product = require('../models/Product');
+const { recordInteraction } = require('../utlis/interactionTracker');
 
 // Add item to cart
 exports.add = async (req, res) => {
@@ -28,6 +29,13 @@ exports.add = async (req, res) => {
         }
 
         await cart.save();
+        await recordInteraction({
+            userId,
+            productId,
+            eventType: 'cart_add',
+            sessionId: req.body.sessionId || req.headers['x-session-id'] || `server-${userId}`,
+            metadata: { quantity }
+        });
         res.status(200).json({ message: 'Item added to cart' });
     } catch (error) {
         console.error('Error adding item to cart:', error);
@@ -56,6 +64,12 @@ exports.remove = async (req, res) => {
         if (itemIndex > -1) {
             cart.items.splice(itemIndex, 1);
             await cart.save();
+            await recordInteraction({
+                userId,
+                productId,
+                eventType: 'cart_remove',
+                sessionId: req.body.sessionId || req.headers['x-session-id'] || `server-${userId}`
+            });
             res.status(200).json({ message: 'Item removed from cart' });
         } else {
             res.status(404).json({ message: 'Item not found in cart' });

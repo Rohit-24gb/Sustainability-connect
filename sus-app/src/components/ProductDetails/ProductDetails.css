@@ -81,3 +81,99 @@
   color: #555;
 }
 
+.eco-score-badge {
+  align-self: flex-start;
+  margin: 4px 0 12px;
+  padding: 7px 12px;
+  border-radius: 999px;
+  color: #17482e;
+  background: #e2f3e8;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.impact-card {
+  margin-top: 22px;
+  padding: 18px;
+  border: 1px solid #dce7df;
+  border-radius: 8px;
+  background: #fbfefc;
+}
+
+.impact-card h2 {
+  margin: 0 0 14px;
+  color: #1f3b2d;
+  font-size: 20px;
+}
+
+.impact-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.impact-grid div {
+  padding: 12px;
+  border-radius: 8px;
+  background: #eef7f1;
+}
+
+.impact-grid span {
+  display: block;
+  margin-bottom: 6px;
+  color: #5a6a61;
+  font-size: 13px;
+}
+
+.impact-grid strong {
+  color: #1e3128;
+  font-size: 15px;
+}
+
+.impact-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 14px 0 0;
+}
+
+.impact-tags span {
+  padding: 5px 9px;
+  border-radius: 999px;
+  color: #1d5c38;
+  background: #e7f3eb;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.impact-explanation,
+.impact-certifications {
+  margin: 14px 0 0;
+  color: #4f6258;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+@media (max-width: 900px) {
+  .product-detail-container {
+    flex-direction: column;
+    width: calc(100% - 32px);
+  }
+
+  .product-image-container,
+  .product-details-info {
+    width: 100%;
+  }
+}
+
+@media (max-width: 520px) {
+  .product-main-image {
+    width: 100%;
+    height: auto;
+  }
+
+  .impact-grid {
+    grid-template-columns: 1fr;
+  }
+}
+

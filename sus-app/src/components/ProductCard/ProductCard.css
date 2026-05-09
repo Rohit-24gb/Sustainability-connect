@@ -33,6 +33,17 @@
   margin: 0 0 10px;
 }
 
+.product-eco-badge {
+  display: inline-block;
+  margin: 0 0 10px;
+  padding: 5px 9px;
+  border-radius: 999px;
+  color: #17482e;
+  background: #e2f3e8;
+  font-size: 13px;
+  font-weight: 700;
+}
+
 .product-card-description {
   color: #666;
 }

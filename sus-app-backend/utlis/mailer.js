@@ -1,27 +1,26 @@
 const nodemailer = require('nodemailer');
 
-const sendOtpEmail = (email, otp) => {
-    let transporter = nodemailer.createTransport({
+const sendOtpEmail = async (email, otp) => {
+    if (!process.env.MAIL_USER || !process.env.MAIL_PASS) {
+        throw new Error('MAIL_USER and MAIL_PASS must be configured');
+    }
+
+    const transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
-            user: 'sustainabilityconnect.bpl@gmail.com',
-            pass: 'qanl ukog fpax oyfn'
+            user: process.env.MAIL_USER,
+            pass: process.env.MAIL_PASS
         }
     });
 
-    let mailOptions = {
-        from: 'sustainabilityconnect.bpl@gmail.com',
+    const mailOptions = {
+        from: process.env.MAIL_FROM || process.env.MAIL_USER,
         to: email,
         subject: 'Your OTP for Password Reset',
         text: `Your OTP is ${otp}`
     };
 
-    transporter.sendMail(mailOptions, (error, info) => {
-        if (error) {
-            return console.log(error);
-        }
-        console.log('Email sent: ' + info.response);
-    });
-}
+    await transporter.sendMail(mailOptions);
+};
 
-module.exports = sendOtpEmail;
+module.exports = sendOtpEmail;

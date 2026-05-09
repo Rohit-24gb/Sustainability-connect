@@ -1,21 +1,35 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const jwt = require("jsonwebtoken");
 const multer = require("multer");
 const path = require("path");
 const cors = require("cors");
-const dotenv = require('dotenv');
+require("dotenv").config();
+const { validateEnv } = require("./config/env");
+const securityHeaders = require("./middleware/securityHeaders");
+const requestLogger = require("./middleware/requestLogger");
+const rateLimiter = require("./middleware/rateLimiter");
+const responseMiddleware = require("./middleware/response");
+const { metricsMiddleware, getMetrics } = require("./middleware/metrics");
+const { notFound, errorHandler } = require("./middleware/errorHandler");
+const logger = require("./utlis/logger");
 
+validateEnv();
 
-
-require('dotenv').config();
-dotenv.config(); 
 const app = express();
 const port = process.env.PORT || 4000; 
 
 // Middleware
-app.use(express.json());
-app.use(cors());
+app.set("trust proxy", 1);
+app.use(securityHeaders);
+app.use(requestLogger);
+app.use(metricsMiddleware);
+app.use(responseMiddleware);
+app.use(express.json({ limit: "1mb" }));
+app.use(cors({
+  origin: process.env.CLIENT_URL || "http://localhost:3000",
+  credentials: true
+}));
+app.use(rateLimiter({ windowMs: 15 * 60 * 1000, limit: 300 }));
 
 
 
@@ -30,9 +44,12 @@ const userRoutes = require('./routes/userRoutes');
 const OtpRoutes = require('./routes/OtpRoutes'); 
 const CartRoutes = require('./routes/cartRoutes')
 // const PaymentRoutes = require('./routes/paymentRoutes')
-const bodyParser = require('body-parser');
 const paymentRoutes = require('./routes/paymentRoutes');
 const orderRoutes = require('./routes/Orderroute');
+const interactionRoutes = require('./routes/interactionRoutes');
+const recommendationRoutes = require('./routes/recommendationRoutes');
+const ecoScoreRoutes = require('./routes/ecoScoreRoutes');
+const adminAnalyticsRoutes = require('./routes/adminAnalyticsRoutes');
 
 
 
@@ -50,24 +67,38 @@ app.use('/api/users', userRoutes);
 app.use('/api/auth', OtpRoutes);
 app.use('/api/cart', CartRoutes);
 // app.use('/payment', PaymentRoutes)
-app.use(bodyParser.json());
 app.use('/v1', paymentRoutes);
 app.use('/orders', orderRoutes);
+app.use('/api/interactions', interactionRoutes);
+app.use('/api/recommendations', recommendationRoutes);
+app.use('/api/eco-score', ecoScoreRoutes);
+app.use('/api/admin/analytics', adminAnalyticsRoutes);
 
 
 
 
 // Database Connection
 mongoose.connect(process.env.MONGODB_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
+  serverSelectionTimeoutMS: 10000
 })
-  .then(() => console.log('MongoDB connected'))
-  .catch(err => console.error('MongoDB connection error:', err));
+  .then(() => logger.info('mongodb_connected'))
+  .catch(err => logger.error('mongodb_connection_error', { message: err.message }));
 
 // API Endpoints
 app.get("/", (req, res) => {
   res.send("Express App is Running");
+});
+
+app.get("/health", (req, res) => {
+  res.success({
+    status: "ok",
+    database:
+      mongoose.connection.readyState === 1 ? "connected" : "disconnected"
+  }, "Service health");
+});
+
+app.get("/metrics", (req, res) => {
+  res.success({ metrics: getMetrics() }, "Service metrics");
 });
 
 // Image storage engine
@@ -91,10 +122,13 @@ app.post("/upload", upload.single('photos'), (req, res) => {
   });
 });
 
+app.use(notFound);
+app.use(errorHandler);
+
 // Start the server
 app.listen(port, (error) => {
   if (error) throw error;
-  console.log(`Server is running on port ${port}`);
+  logger.info("server_started", { port });
 });
 
 

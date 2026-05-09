@@ -1,9 +1,10 @@
 import './Cart.css';
 import React, { useEffect, useState } from 'react';
-import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { API_BASE_URL, getAuthHeaders } from "../../config/api";
+import { getSessionId } from "../../config/tracking";
 
 const Cart = () => {
   const [cartItems, setCartItems] = useState([]);
@@ -21,7 +22,9 @@ const Cart = () => {
       }
 
       try {
-        const response = await fetch(`https://sustainability-connect-backend.onrender.com/api/cart/verify/${user._id}`);
+        const response = await fetch(`${API_BASE_URL}/api/cart/verify/${user._id}`, {
+          headers: getAuthHeaders()
+        });
         const data = await response.json();
         console.log('Cart data:', data);
         if (response.ok) {
@@ -69,9 +72,10 @@ const Cart = () => {
     const config = {
       method: "post",
       maxBodyLength: Infinity,
-      url: `https://sustainability-connect-backend.onrender.com/v1/orders`,
+      url: `${API_BASE_URL}/v1/orders`,
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        ...getAuthHeaders()
       },
       data: data
     };
@@ -107,16 +111,19 @@ const Cart = () => {
           paymentId: response.razorpay_payment_id,
           orderId: orderData.order_id,
           userId: JSON.parse(localStorage.getItem('user'))._id,
+          sessionId: getSessionId(),
           cartItems: cartItems.map(item => ({
             productId: item.productId,
             quantity: item.quantity,
             price: item.price
           })),
-          totalAmount: calculateTotalAmount()
+          totalAmount: Number(calculateTotalAmount())
         };
 
         try {
-          await axios.post(`https://sustainability-connect-backend.onrender.com/v1/payment/complete`, paymentDetails);
+          await axios.post(`${API_BASE_URL}/v1/payment/complete`, paymentDetails, {
+            headers: getAuthHeaders()
+          });
           localStorage.setItem('onComplete', JSON.stringify(response));
           toast.success('Payment successful and order saved!');
           navigate('/success');
@@ -152,12 +159,12 @@ const Cart = () => {
       return;
     }
 
-    const requestBody = { userId: user._id, productId };
+    const requestBody = { userId: user._id, productId, sessionId: getSessionId() };
 
     try {
-      const response = await fetch(`https://sustainability-connect-backend.onrender.com/api/cart/remove`, {
+      const response = await fetch(`${API_BASE_URL}/api/cart/remove`, {
         method: 'DELETE',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', ...getAuthHeaders() },
         body: JSON.stringify(requestBody)
       });
 
@@ -202,7 +209,6 @@ const Cart = () => {
           <button className="checkout-button" onClick={handleCheckout}>Checkout</button>
         </>
       )}
-      <ToastContainer />
     </div>
   );
 };
@@ -235,7 +241,7 @@ export default Cart;
 //       }
 
 //       try {
-//         const response = await fetch(`https://sustainability-connect-backend.onrender.com/api/cart/verify/${user._id}`);
+//         const response = await fetch(`${API_BASE_URL}/api/cart/verify/${user._id}`);
 //         const data = await response.json();
 //         console.log('Cart data:', data);
 //         if (response.ok) {
@@ -282,7 +288,7 @@ export default Cart;
 //     const config = {
 //       method: "post",
 //       maxBodyLength: Infinity,
-//       url: `https://sustainability-connect-backend.onrender.com/payment/orders`,
+//       url: `${API_BASE_URL}/payment/orders`,
 //       headers: {
 //         'Content-Type': 'application/json'
 //       },
@@ -328,7 +334,7 @@ export default Cart;
 //         };
 
 //         try {
-//           await axios.post(`https://sustainability-connect-backend.onrender.com/payment/payment/complete`, paymentDetails);
+//           await axios.post(`${API_BASE_URL}/payment/payment/complete`, paymentDetails);
 //           localStorage.setItem('onComplete', JSON.stringify(response));
 //           toast.success('Payment successful and order saved!');
 //           navigate('/success');
@@ -367,7 +373,7 @@ export default Cart;
 //     const requestBody = { userId: user._id, productId };
 
 //     try {
-//       const response = await fetch(`https://sustainability-connect-backend.onrender.com/api/cart/remove`, {
+//       const response = await fetch(`${API_BASE_URL}/api/cart/remove`, {
 //         method: 'DELETE',
 //         headers: { 'Content-Type': 'application/json' },
 //         body: JSON.stringify(requestBody)
@@ -420,5 +426,3 @@ export default Cart;
 // };
 
 // export default Cart;
-
-

@@ -1,0 +1,11 @@
+**/node_modules
+**/build
+**/.venv
+**/__pycache__
+**/*.pyc
+
+.env
+.env.local
+*.log
+
+sus-app-backend/upload/images

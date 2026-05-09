@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import ProductCard from "../components/ProductCard/ProductCard";
 import './Shop-category.css';
+import { API_BASE_URL } from "../config/api";
+import { trackInteraction } from "../config/tracking";
 
 const ShopCategory = ({ banner, categoryID }) => {
   const [products, setProducts] = useState([]);
@@ -14,9 +16,18 @@ const ShopCategory = ({ banner, categoryID }) => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get(`https://sustainability-connect-backend.onrender.com/api/products/category/${categoryID}`);
+        const response = await axios.get(`${API_BASE_URL}/api/products/category/${categoryID}`);
         setProducts(response.data);
         setDisplayedProducts(response.data.slice(0, showCount));
+        trackInteraction({
+          eventType: "search",
+          category: String(categoryID),
+          query: `category:${categoryID}`,
+          metadata: {
+            source: "shop_category",
+            resultCount: response.data.length
+          }
+        });
         setLoading(false);
       } catch (err) {
         setError(err.message);
@@ -39,6 +50,14 @@ const ShopCategory = ({ banner, categoryID }) => {
 
   const handleSortChange = (e) => {
     setSortBy(e.target.value);
+    trackInteraction({
+      eventType: "search",
+      category: String(categoryID),
+      query: `sort:${e.target.value}`,
+      metadata: {
+        source: "shop_category_sort"
+      }
+    });
   };
 
   const handleShowMore = () => {
@@ -86,7 +105,6 @@ const ShopCategory = ({ banner, categoryID }) => {
 };
 
 export default ShopCategory;
-
 
 
 

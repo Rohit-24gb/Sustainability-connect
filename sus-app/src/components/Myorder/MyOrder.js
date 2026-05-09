@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify';
 import './MyOrder.css';
+import { API_BASE_URL, getAuthHeaders } from "../../config/api";
 
 const MyOrders = () => {
   const [orders, setOrders] = useState([]);
@@ -18,13 +18,15 @@ const MyOrders = () => {
       }
 
       try {
-        const response = await fetch(`https://sustainability-connect-backend.onrender.com/orders/${user._id}`);
+        const response = await fetch(`${API_BASE_URL}/orders/${user._id}`, {
+          headers: getAuthHeaders()
+        });
         const data = await response.json();
 
         if (response.ok) {
-          setOrders(data);
+          setOrders(Array.isArray(data) ? data : []);
         } else {
-          toast.error('Failed to fetch orders');
+          toast.error(data.message || 'Failed to fetch orders');
         }
       } catch (error) {
         toast.error('Error fetching orders');
@@ -50,9 +52,11 @@ const MyOrders = () => {
               <h3>Order ID: {order._id}</h3>
               <div className="order-date">Date: {new Date(order.date).toLocaleDateString()}</div>
               <ul className="order-items">
-                {order.items.map(item => (
-                  <li key={item.productId._id}>
-                    <div className="product-name">Product Name: {item.productId.name}</div>
+                {(order.items || []).map((item, index) => (
+                  <li key={item.productId?._id || item.productId || index}>
+                    <div className="product-name">
+                      Product Name: {item.productId?.name || 'Product unavailable'}
+                    </div>
                     <div className="quantity">Quantity: {item.quantity}</div>
                     <div className="price">Price: ${item.price}</div>
                   </li>
@@ -63,7 +67,6 @@ const MyOrders = () => {
           ))}
         </ul>
       )}
-      <ToastContainer />
     </div>
   );
 };

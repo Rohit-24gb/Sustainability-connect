@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Signup.css';
 import signupImage from '../assets/LeftPaneImageForLogin.png'; // Replace with the actual path to your image
+import { API_BASE_URL } from "../config/api";
 
 const SignUp = () => {
     const [name, setName] = useState('');
@@ -10,6 +11,8 @@ const SignUp = () => {
     const [phone, setPhone] = useState('');
     const [gender, setGender] = useState('');
     const [city, setCity] = useState('');
+    const [error, setError] = useState('');
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -20,21 +23,39 @@ const SignUp = () => {
     }, [navigate]);
 
     const collectData = async () => {
+        if (!name || !email || !password || !phone || !gender || !city) {
+            setError('All fields are required');
+            return;
+        }
+
+        setError('');
+        setLoading(true);
+
         try {
-            let result = await fetch('https://sustainability-connect-backend.onrender.com/api/users/register', {
+            const response = await fetch(`${API_BASE_URL}/api/users/register`, {
                 method: 'POST',
                 body: JSON.stringify({ name, email, password, phone, gender, city }),
                 headers: {
                     'Content-Type': 'application/json',
                 },
             });
-            result = await result.json();
-            if (result) {
+            const result = await response.json();
+
+            if (response.ok && result.success) {
+                localStorage.setItem("user", JSON.stringify(result.user));
+                localStorage.setItem("token", result.accessToken || result.token);
+                if (result.refreshToken) {
+                    localStorage.setItem("refreshToken", result.refreshToken);
+                }
                 navigate('/');
-                localStorage.setItem("user", JSON.stringify(result));
+            } else {
+                setError(result.message || 'Sign up failed');
             }
         } catch (error) {
             console.error('Error during sign-up:', error);
+            setError(`Could not connect to the backend at ${API_BASE_URL}. Please start the backend server.`);
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -42,6 +63,7 @@ const SignUp = () => {
         <div className='signup-container'>
             <div className='form-section'>
                 <h1 className='header-text'>Register</h1>
+                {error && <p className="error-message">{error}</p>}
                 <input
                     className='input-box'
                     type='text'
@@ -84,8 +106,8 @@ const SignUp = () => {
                     onChange={(e) => setCity(e.target.value)}
                     placeholder='Enter City'
                 />
-                <button onClick={collectData} type='button' className='app-button'>
-                    Sign Up
+                <button onClick={collectData} type='button' className='app-button' disabled={loading}>
+                    {loading ? 'Signing Up...' : 'Sign Up'}
                 </button>
             </div>
             <div className='image-section'>
@@ -96,5 +118,3 @@ const SignUp = () => {
 };
 
 export default SignUp;
-
-

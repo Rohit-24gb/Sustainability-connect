@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import './RecyclingCenterDetail.css';
+import { API_BASE_URL } from "../../config/api";
 
 const RecyclingCenterDetail = () => {
   const { centerID } = useParams();
@@ -12,7 +13,7 @@ const RecyclingCenterDetail = () => {
   useEffect(() => {
     const fetchCenterDetails = async () => {
       try {
-        const response = await axios.get(`https://sustainability-connect-backend.onrender.com/api/recycling-centers/${centerID}`);
+        const response = await axios.get(`${API_BASE_URL}/api/recycling-centers/${centerID}`);
         setCenter(response.data);
         setLoading(false);
       } catch (err) {

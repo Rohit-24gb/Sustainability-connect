@@ -15,6 +15,9 @@ const ProductCard = ({ product }) => {
       <img src={product.image_url} alt={product.name} />
       <div className="product-card-content">
         <h3 className="product-card-title">{product.name}</h3>
+        {product.ecoScore !== undefined && (
+          <span className="product-eco-badge">Eco {product.ecoScore}/100</span>
+        )}
         <p className="product-card-price">₹ {product.price.toFixed(2)}</p>
         {/* <p className="product-card-description">{product.description}</p> */}
       </div>

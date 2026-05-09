@@ -8,6 +8,8 @@ import Products from "./Pages/Product";
 import Community from "./Pages/Community";
 import About from "./Pages/About";
 import Contact from "./Pages/Contact";
+import SearchProducts from "./Pages/SearchProducts";
+import AdminAnalytics from "./Pages/AdminAnalytics";
 import Nav from "./components/Nav/Nav";
 import Login from "./Pages/Login";
 import CartPage from "./components/Cart/cartPage";
@@ -17,7 +19,7 @@ import SignUp from "./Pages/Signup";
 import ForgetPassword from "./components/ForgetPassword/ForgetPassword";
 import OtpVerification from './components/ForgetPassword/OtpVerification'
 import ChangePassword from './components/ForgetPassword/ChangePassword'
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Success from './components/Sucess'
 import Cancel from './components/Cancel'
@@ -34,6 +36,8 @@ function App() {
         <Route path="/home" element={<Homepage />} />
         <Route path="/recyclingcenter" element={<RecyclingCenter />} />
         <Route path="/products/*" element={<Products />} />
+        <Route path="/search" element={<SearchProducts />} />
+        <Route path="/admin/analytics" element={<AdminAnalytics />} />
         <Route path="/community" element={<Community />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />

@@ -1,3 +1,5 @@
+import { API_BASE_URL, getAuthHeaders } from "../../config/api";
+import { getSessionId } from "../../config/tracking";
 // src/Context/Shopcontext.js
 import React, { createContext, useEffect, useState } from "react";
 import axios from "axios";
@@ -12,7 +14,7 @@ const ShopcontextProvider = (props) => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get(`https://sustainability-connect-backend.onrender.com/api/products`);
+        const response = await axios.get(`${API_BASE_URL}/api/products`);
         setAllProducts(response.data);
       } catch (error) {
         console.error("Error fetching products:", error);
@@ -24,9 +26,24 @@ const ShopcontextProvider = (props) => {
 
   useEffect(() => {
     const fetchCartItems = async () => {
+      const user = JSON.parse(localStorage.getItem("user"));
+
+      if (!user) {
+        setCartItems({});
+        return;
+      }
+
       try {
-        const response = await axios.get(`https://sustainability-connect-backend.onrender.com/api/cart`);
-        setCartItems(response.data);
+        const response = await axios.get(`${API_BASE_URL}/api/cart/verify/${user._id}`, {
+          headers: getAuthHeaders()
+        });
+        const nextCart = {};
+
+        (response.data.cart?.items || []).forEach((item) => {
+          nextCart[item.productId] = item.quantity;
+        });
+
+        setCartItems(nextCart);
       } catch (error) {
         console.error("Error fetching cart items:", error);
       }
@@ -36,16 +53,37 @@ const ShopcontextProvider = (props) => {
   }, []);
 
   const addToCart = async (itemId) => {
+    const user = JSON.parse(localStorage.getItem("user"));
+
+    if (!user) {
+      console.error("Please log in to add items to cart");
+      return;
+    }
+
     try {
       setCartItems((prev) => ({ ...prev, [itemId]: (prev[itemId] || 0) + 1 }));
 
-      await axios.post(`https://sustainability-connect-backend.onrender.com/api/cart/add`, { itemId });
+      await axios.post(`${API_BASE_URL}/api/cart/add`, {
+        userId: user._id,
+        productId: itemId,
+        quantity: 1,
+        sessionId: getSessionId()
+      }, {
+        headers: getAuthHeaders()
+      });
     } catch (error) {
       console.error("Error adding to cart:", error);
     }
   };
 
   const removeFromCart = async (itemId) => {
+    const user = JSON.parse(localStorage.getItem("user"));
+
+    if (!user) {
+      console.error("Please log in to remove items from cart");
+      return;
+    }
+
     try {
       setCartItems((prev) => {
         const newCart = { ...prev };
@@ -57,7 +95,14 @@ const ShopcontextProvider = (props) => {
         return newCart;
       });
 
-      await axios.post(`https://sustainability-connect-backend.onrender.com/api/cart/remove`, { itemId });
+      await axios.delete(`${API_BASE_URL}/api/cart/remove`, {
+        headers: getAuthHeaders(),
+        data: {
+          userId: user._id,
+          productId: itemId,
+          sessionId: getSessionId()
+        }
+      });
     } catch (error) {
       console.error("Error removing from cart:", error);
     }
@@ -68,7 +113,7 @@ const ShopcontextProvider = (props) => {
     for (const itemId in cartItems) {
       const itemInfo = allProducts.find((product) => product._id === itemId);
       if (itemInfo) {
-        totalAmount += itemInfo.new_price * cartItems[itemId];
+        totalAmount += itemInfo.price * cartItems[itemId];
       }
     }
     return totalAmount;

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import './Popular.css'; // Add your CSS styles here
+import { API_BASE_URL } from "../../config/api";
 
 const PopularProducts = () => {
   const [products, setProducts] = useState([]);
@@ -11,7 +12,7 @@ const PopularProducts = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get('https://sustainability-connect-backend.onrender.com/api/products');
+        const response = await axios.get(`${API_BASE_URL}/api/products`);
         // Limit to the first 8 products
         setProducts(response.data.slice(0, 8));
         setLoading(false);

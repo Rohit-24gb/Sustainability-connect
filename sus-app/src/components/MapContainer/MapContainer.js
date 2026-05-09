@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './MapContainer.css';
+import { API_BASE_URL } from "../../config/api";
+import { trackInteraction } from "../../config/tracking";
 
 const MapContainer = () => {
   const [recyclingCenters, setRecyclingCenters] = useState([]);
@@ -10,7 +12,7 @@ const MapContainer = () => {
 
   // Fetch data from the backend API
   useEffect(() => {
-    fetch(`https://sustainability-connect-backend.onrender.com/api/recycling-centers`)
+    fetch(`${API_BASE_URL}/api/recycling-centers`)
       .then(response => response.json())
       .then(data => setRecyclingCenters(data))
       .catch(error => console.error('Error fetching data:', error));
@@ -22,6 +24,28 @@ const MapContainer = () => {
       String(center[key]).toLowerCase().includes(searchTerm.toLowerCase())
     )
   );
+
+  useEffect(() => {
+    const trimmed = searchTerm.trim();
+
+    if (trimmed.length < 2) {
+      return undefined;
+    }
+
+    const timeoutId = setTimeout(() => {
+      trackInteraction({
+        eventType: "search",
+        query: trimmed,
+        category: "recycling_center",
+        metadata: {
+          source: "recycling_center_search",
+          resultCount: filteredCenters.length
+        }
+      });
+    }, 600);
+
+    return () => clearTimeout(timeoutId);
+  }, [searchTerm, filteredCenters.length]);
 
   // Toggle show more or less
   const handleShowMore = () => {
@@ -151,4 +175,3 @@ export default MapContainer;
 // };
 
 // export default MapContainer;
-

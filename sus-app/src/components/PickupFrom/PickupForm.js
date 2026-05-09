@@ -5,6 +5,7 @@ import PickupImage from '../../assets/project2.jpg';
 import { NotificationManager } from 'react-notifications';
 import { NotificationContainer } from 'react-notifications';
 import 'react-notifications/lib/notifications.css';
+import { API_BASE_URL } from "../../config/api";
 
 const PickupForm = () => {
   const [centers, setCenters] = useState([]);
@@ -21,7 +22,7 @@ const PickupForm = () => {
 
   useEffect(() => {
     // Fetch recycling centers from API
-    fetch('https://sustainability-connect-backend.onrender.com/api/recycling-centers')
+    fetch(`${API_BASE_URL}/api/recycling-centers`)
       .then(response => response.json())
       .then(data => setCenters(data))
       .catch(error => console.error('Error fetching recycling centers:', error));
@@ -35,7 +36,7 @@ const PickupForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    fetch('https://sustainability-connect-backend.onrender.com/api/schedule-pickup', {
+    fetch(`${API_BASE_URL}/api/schedule-pickup`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

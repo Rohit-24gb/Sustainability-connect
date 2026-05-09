@@ -1,93 +1,129 @@
-# 🌱 Sustainability Connect
+# Sustainability Connect AI
 
-## 📌 Overview
+Sustainability Connect AI is a full-stack sustainable marketplace where users can discover eco-friendly products, search by intent, get recommendations, understand product impact, and track sustainability behavior.
 
-**Sustainability Connect** is a platform designed to bridge the gap between individuals, organizations, and sustainable initiatives. It promotes eco-friendly practices, collaboration, and awareness by connecting stakeholders working toward a greener future.
+## Architecture
 
----
+- React frontend in `sus-app`
+- Node.js Express API gateway in `sus-app-backend`
+- FastAPI AI microservice in `ai-service`
+- MongoDB Atlas for product, user, order, interaction, recommendation, and embedding data
+- Redis for cache, rate-limit/session foundations, and future worker queues
+- Docker Compose for local multi-service development
+- GitHub Actions for CI checks
 
-## 🚀 Features
+## Week 8: Docker, CI/CD, Deployment
 
-* 🌍 Connect with sustainability-focused individuals and organizations
-* 📊 Share and explore eco-friendly projects
-* 🤝 Collaboration opportunities for green initiatives
-* 📢 Awareness and knowledge sharing
-* 📍 Location-based sustainability engagement (if applicable)
+This repo now includes:
 
----
+- Dockerfiles for frontend, backend, and AI service
+- `docker-compose.yml` for frontend, backend, AI service, Redis, and persistent upload/cache volumes
+- Optional local env loading from `sus-app-backend/.env` and `ai-service/.env`
+- Health checks for backend, AI service, and Redis
+- GitHub Actions workflow at `.github/workflows/ci.yml`
+- Deployment guide at `docs/deployment.md`
 
-## 🛠️ Tech Stack
+## Week 9: Collaborative Filtering + Hybrid Ranking
 
-*(Update this section based on your actual project)*
+The recommendation engine now combines content-based ranking with collaborative filtering from the `interactions` collection.
 
-* Frontend: HTML, CSS, JavaScript / React
-* Backend: Node.js / Django / Flask
-* Database: MongoDB / MySQL / Firebase
-* Tools: Git, APIs, etc.
+Hybrid formula:
 
----
+```txt
+Final Score =
+  0.35 * content_similarity
++ 0.25 * collaborative_score
++ 0.20 * eco_score
++ 0.10 * popularity
++ 0.10 * freshness
+```
 
-## 📂 Project Structure
+Collaborative filtering uses a user/session-product interaction matrix built from weighted events such as views, cart additions, purchases, wishlist actions, and cart removals. It compares users or sessions with cosine similarity and recommends products that similar eco-shoppers interacted with.
 
-Sustainability-connect/
-│── frontend/        # UI related files
-│── backend/         # Server-side logic
-│── database/        # DB models / schema
-│── assets/          # Images, icons, etc.
-│── README.md
+See [docs/week9-hybrid-recommendations.md](docs/week9-hybrid-recommendations.md) for the interview explanation.
 
----
+## Local Setup
 
-## ⚙️ Installation & Setup
+Create local env files:
 
-### 1. Clone the repository
+```powershell
+copy .env.example .env
+copy sus-app-backend\.env.example sus-app-backend\.env
+copy ai-service\.env.example ai-service\.env
+```
 
-git clone https://github.com/Rohit-24gb/Sustainability-connect.git
-cd Sustainability-connect
+Update the service env files with your real MongoDB Atlas URI, JWT secrets, payment keys, and mail credentials. The root `.env` controls Compose project name and host ports.
 
-### 2. Install dependencies
+Run everything with Docker:
 
-npm install
-*(or use pip install -r requirements.txt if it's a Python project)*
+```powershell
+docker compose up --build
+```
 
-### 3. Run the project
+Default URLs:
 
-npm start
+```txt
+Frontend:    http://localhost:3000
+Express API: http://localhost:4000
+AI Service:  http://localhost:8000
+Redis:       localhost:6379
+```
 
----
+Health endpoints:
 
-## 💡 Usage
+```txt
+GET http://localhost:4000/health
+GET http://localhost:8000/health
+```
 
-* Register/Login to the platform
-* Explore sustainability projects
-* Collaborate or contribute
-* Share your own eco-friendly initiatives
+## Useful Local Commands
 
----
+Frontend build:
 
-## 🤝 Contributing
+```powershell
+cd sus-app
+npm.cmd run build
+```
 
-Contributions are welcome!
+Backend syntax check:
 
-Steps:
+```powershell
+cd sus-app-backend
+node --check index.js
+```
 
-1. Fork the repository
-2. Create a new branch (feature-xyz)
-3. Commit your changes
-4. Push and create a Pull Request
+AI service compile check:
 
----
+```powershell
+cd ai-service
+python -m compileall app
+```
 
-## 🛡️ License
+Docker Compose validation:
 
-This project is licensed under the MIT License.
+```powershell
+docker compose config
+```
 
----
+## Production Targets
 
-## 📞 Contact
+- Frontend: Vercel or Netlify
+- Express API: Render, Railway, or AWS ECS
+- FastAPI AI service: Render, Railway, or AWS ECS
+- MongoDB: MongoDB Atlas
+- Redis: Upstash Redis or Redis Cloud
+- CI/CD: GitHub Actions
+- Monitoring: Sentry, OpenTelemetry, Grafana/Prometheus
 
-* 📧 Email:
-[rohitrajaksnd@gmail.com](mailto: rohitrajaksnd@gmail.com) [suryakantmani28@gmail.com](mailto:suryakantmani28@gmail.com)
+See [docs/deployment.md](docs/deployment.md) for the full deployment checklist.
 
+## Resume Impact
 
+- Containerized a MERN + FastAPI AI marketplace with Docker Compose.
+- Added CI checks for React build, Express syntax, FastAPI compilation, and Compose config validation.
+- Documented deployment across frontend hosting, API services, MongoDB Atlas, Redis, and production secrets.
 
+## Contact
+
+- rohitrajaksnd@gmail.com
+- suryakantmani28@gmail.com

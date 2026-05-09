@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import backgroundImage from '../../assets/forget.jpg';
+import { API_BASE_URL } from "../../config/api";
 
 const Container = styled.div`
   display: flex;
@@ -91,7 +92,7 @@ const ChangePassword = () => {
             return;
         }
 
-        let result = await fetch(`https://sustainability-connect-backend.onrender.com/api/auth/change-password`, {
+        let result = await fetch(`${API_BASE_URL}/api/auth/change-password`, {
             method: 'post',
             body: JSON.stringify({ email, password }),
             headers: {

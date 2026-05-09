@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import backgroundImage from '../../assets/forget.jpg'; // Update this path
+import { API_BASE_URL } from "../../config/api";
 
 const Container = styled.div`
   display: flex;
@@ -78,7 +79,7 @@ const ForgetPassword = () => {
     const navigate = useNavigate();
 
     const handleForgetPassword = async () => {
-        let result = await fetch(`https://sustainability-connect-backend.onrender.com/api/auth/forget-password`, {
+        let result = await fetch(`${API_BASE_URL}/api/auth/forget-password`, {
             method: 'post',
             body: JSON.stringify({ email }),
             headers: {

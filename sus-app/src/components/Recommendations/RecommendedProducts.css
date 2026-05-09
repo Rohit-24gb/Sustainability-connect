@@ -1,0 +1,140 @@
+.recommendations-section {
+  width: min(1180px, calc(100% - 32px));
+  margin: 48px auto;
+}
+
+.recommendations-header {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 20px;
+}
+
+.recommendations-header h2 {
+  margin: 0;
+  color: #1f3b2d;
+  font-size: 30px;
+  line-height: 1.2;
+}
+
+.recommendations-header p {
+  max-width: 560px;
+  margin: 0;
+  color: #53645a;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.recommendations-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.recommendation-card {
+  display: flex;
+  flex-direction: column;
+  min-height: 360px;
+  color: inherit;
+  text-decoration: none;
+  background: #ffffff;
+  border: 1px solid #dce7df;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+}
+
+.recommendation-card:hover {
+  transform: translateY(-3px);
+  border-color: #8dbb9d;
+  box-shadow: 0 12px 28px rgba(31, 59, 45, 0.14);
+}
+
+.recommendation-card img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  background: #edf4ef;
+}
+
+.recommendation-content {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 16px;
+}
+
+.recommendation-content h3 {
+  margin: 0 0 8px;
+  color: #1e3128;
+  font-size: 17px;
+  line-height: 1.3;
+}
+
+.recommendation-price {
+  margin: 0;
+  color: #16653e;
+  font-weight: 700;
+}
+
+.recommendation-reason {
+  min-height: 42px;
+  margin: 0;
+  color: #5a6a61;
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.recommendation-score {
+  align-self: flex-start;
+  padding: 6px 10px;
+  border-radius: 999px;
+  color: #17482e;
+  background: #e2f3e8;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.recommendation-skeleton {
+  min-height: 320px;
+  background:
+    linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,0.75), rgba(255,255,255,0)),
+    #edf4ef;
+  background-size: 220px 100%, 100% 100%;
+  animation: recommendation-shimmer 1.4s infinite;
+}
+
+@keyframes recommendation-shimmer {
+  from {
+    background-position: -220px 0, 0 0;
+  }
+
+  to {
+    background-position: calc(100% + 220px) 0, 0 0;
+  }
+}
+
+@media (max-width: 980px) {
+  .recommendations-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .recommendations-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 560px) {
+  .recommendations-section {
+    width: min(100% - 20px, 1180px);
+    margin: 32px auto;
+  }
+
+  .recommendations-grid {
+    grid-template-columns: 1fr;
+  }
+}

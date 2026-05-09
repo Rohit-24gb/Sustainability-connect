@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 // import { Shopcontext } from '../Context/Shopcontext';
 import './Navbar.css';
@@ -6,17 +6,9 @@ import cart from '../../assets/cart_icon.png';
 
 const Navbar = () => {
   const [isActive, setIsActive] = useState(false);
-  const [user, setUser] = useState(null);
+  const [searchTerm, setSearchTerm] = useState('');
   const navigate = useNavigate(); // Initialize useNavigate
   // const { getTotalCartItems } = useContext(Shopcontext) || {};
-
-  useEffect(() => {
-    // Check if user is already logged in (e.g., from localStorage)
-    const loggedUser = JSON.parse(localStorage.getItem('user'));
-    if (loggedUser) {
-      setUser(loggedUser);
-    }
-  }, []);
 
   const toggleNavbar = () => {
     setIsActive(!isActive);
@@ -27,7 +19,19 @@ const Navbar = () => {
     navigate('/Login');
   };
 
+  const handleSearch = (event) => {
+    event.preventDefault();
+    const query = searchTerm.trim();
+
+    if (query) {
+      navigate(`/search?q=${encodeURIComponent(query)}`);
+      setSearchTerm('');
+      setIsActive(false);
+    }
+  };
+
   const auth = localStorage.getItem('user'); // Determine if user is logged in
+  const user = auth ? JSON.parse(auth) : null;
 
   return (
     <nav className='navbar'>
@@ -38,9 +42,21 @@ const Navbar = () => {
           <Link to="/home">Home</Link>
           <Link to="/recyclingcenter">Recycling Center</Link>
           <Link to="/products">Products</Link>
+          <form className="navbar-search" onSubmit={handleSearch}>
+            <input
+              type="search"
+              value={searchTerm}
+              onChange={(event) => setSearchTerm(event.target.value)}
+              placeholder="Search eco products"
+            />
+            <button type="submit">Search</button>
+          </form>
           <Link to="/community">Community</Link>
           <Link to="/about">About Us</Link>
           <Link to="/contact">Contact Us</Link>
+          {auth && user?.role && ["admin", "seller"].includes(user.role) && (
+            <Link to="/admin/analytics">Analytics</Link>
+          )}
           <Link to="/orders">My Order</Link>
         
             {auth ? (
