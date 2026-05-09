@@ -12,7 +12,7 @@ Sustainability Connect AI is a full-stack sustainable marketplace where users ca
 - Docker Compose for local multi-service development
 - GitHub Actions for CI checks
 
-## Week 8: Docker, CI/CD, Deployment
+## Docker, CI/CD, Deployment
 
 This repo now includes:
 
@@ -23,7 +23,7 @@ This repo now includes:
 - GitHub Actions workflow at `.github/workflows/ci.yml`
 - Deployment guide at `docs/deployment.md`
 
-## Week 9: Collaborative Filtering + Hybrid Ranking
+##  Collaborative Filtering + Hybrid Ranking
 
 The recommendation engine now combines content-based ranking with collaborative filtering from the `interactions` collection.
 
@@ -117,11 +117,7 @@ docker compose config
 
 See [docs/deployment.md](docs/deployment.md) for the full deployment checklist.
 
-## Resume Impact
 
-- Containerized a MERN + FastAPI AI marketplace with Docker Compose.
-- Added CI checks for React build, Express syntax, FastAPI compilation, and Compose config validation.
-- Documented deployment across frontend hosting, API services, MongoDB Atlas, Redis, and production secrets.
 
 ## Contact
 
