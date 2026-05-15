@@ -4,15 +4,18 @@
   display: flex;
   flex-wrap: wrap;
   background-color: rgb(255, 255, 255);
-  margin: 5% 10% 100px 10%;
-  padding: 15px;
+  width: min(1180px, calc(100% - 32px));
+  margin: 64px auto 90px;
+  padding: clamp(16px, 3vw, 28px);
+  gap: clamp(24px, 4vw, 48px);
 }
 
 .bgimg {
   background-color: rgb(96, 228, 96);
   width: 100%;
   max-width: 360px;
-  height: 400px;
+  aspect-ratio: 9 / 10;
+  height: auto;
   margin: auto;
   /* margin-left: 50px; */
 
@@ -24,23 +27,23 @@
   max-height: 450px;
   /* margin: 15px auto; */
   margin-top: 15px;
-  margin-left: 15px;
+  margin-left: min(15px, 3vw);
   display: block;
 }
 
 .container-context-item {
   flex: 1;
-  margin: 2rem 5%;
+  margin: 0;
   min-width: 300px;
 }
 
 .heading-first {
-  font-size: 2.5rem;
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
   font-family: 'Times New Roman', Times, serif;
 }
 
 .sub-heading-first {
-  font-size: 2rem;
+  font-size: clamp(1.25rem, 3vw, 2rem);
 }
 
 .sub-heading {
@@ -75,6 +78,8 @@
     flex-direction: column;
     align-items: center;
     text-align: center;
+    width: min(100% - 24px, 1180px);
+    margin: 48px auto 60px;
   }
 
 
@@ -90,6 +95,7 @@
 
   .container-context-item {
     margin-left: 0;
+    min-width: 0;
   }
 
   .heading-first {
@@ -112,7 +118,7 @@
 
 @media (max-width: 480px) {
   .container-context {
-    margin: 5% 5% 50px 5%;
+    margin: 36px auto 50px;
   }
 
   .bg-img {

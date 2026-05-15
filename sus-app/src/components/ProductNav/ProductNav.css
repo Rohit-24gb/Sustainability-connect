@@ -14,12 +14,13 @@
    display: flex;
    align-items: center;
    justify-content: space-between;
-   padding: 10px 20px;
+   padding: 10px 16px;
    background-color: #f5f5f5;
  }
  
  .product-nav-title {
    margin: 0;
+   font-size: clamp(1rem, 2vw, 1.35rem);
  }
  
  .product-nav-hamburger {
@@ -44,6 +45,7 @@
    top: 60px; /* Adjust according to the height of your header */
    left: 0;
    z-index: 10;
+   box-shadow: 0 10px 20px rgba(0,0,0,0.08);
  }
  
  .product-nav-menu-visible {
@@ -86,11 +88,15 @@
      width: auto;
      background-color: transparent;
      flex: 1;
+     flex-wrap: wrap;
+     justify-content: flex-end;
+     box-shadow: none;
    }
  
    .nav-link {
-     padding: 10px 15px;
+     padding: 10px clamp(8px, 1vw, 15px);
      border-bottom: none;
+     white-space: nowrap;
    }
  }
  

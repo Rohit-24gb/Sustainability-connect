@@ -7,13 +7,13 @@
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 20px;
+    padding: clamp(16px, 4vw, 32px);
     box-sizing: border-box;
-    margin-top: -70px;
+    margin-top: 0;
 }
 
 .form-section {
-    margin-top: 100px;
+    margin-top: clamp(24px, 6vw, 80px);
     flex: 1;
     padding: 20px;
 }
@@ -24,7 +24,7 @@
 }
 
 .input-box {
-    width: 95%;
+    width: 100%;
     padding: 10px;
     margin: 10px 0;
     border: 1px solid #ddd;
@@ -33,7 +33,7 @@
 }
 
 .app-button {
-    width: 98%;
+    width: 100%;
     padding: 10px;
     background-color: #4CAF50;
     color: white;
@@ -71,6 +71,8 @@
     .image-section, .form-section {
         flex: none;
         width: 100%;
+        margin-top: 20px;
+        padding: 12px;
     }
 
     .image-section img {

@@ -3,22 +3,24 @@
 /* Centering the banner and setting its width */
 .shopcategory-banner {
   display: block;
-  margin: 30px auto;
-  width: 80%; /* Adjusted to 80% */
+  margin: 24px auto;
+  width: 100%; /* Adjusted to 80% */
+  border-radius: 8px;
 }
 
 /* Main container styling */
 .shop-category-container {
-  width: 80%; /* Main container width */
+  width: min(1180px, calc(100% - 32px)); /* Main container width */
   margin: 0 auto; /* Centering container */
   text-align: center;
-  padding: 20px;
+  padding: 20px 0;
 }
 
 /* Banner styling */
 .shop-category-container img {
   width: 100%;
-  max-height: 400px;
+  max-height: min(400px, 38vw);
+  min-height: 180px;
   object-fit: cover;
   margin-bottom: 20px;
 }
@@ -28,6 +30,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 16px;
   margin-bottom: 20px;
 }
 
@@ -50,9 +53,9 @@
 /* Grid layout for products */
 .product-container {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Responsive grid layout */
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr)); /* Responsive grid layout */
   gap: 20px;
-  justify-content: center; /* Default centering */
+  justify-content: stretch; /* Default centering */
 }
 
 /* If there's only one product, align it to the left */
@@ -77,11 +80,15 @@
 /* Pagination buttons */
 .pagination-buttons {
   margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
 }
 
 .pagination-buttons button {
   padding: 10px 20px;
-  margin: 0 10px;
+  margin: 0;
   border: none;
   background-color: #007bff;
   color: white;
@@ -96,13 +103,23 @@
 /* Responsive styles */
 @media (max-width: 1200px) {
   .product-container {
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Adjust number of columns */
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 210px), 1fr)); /* Adjust number of columns */
   }
 }
 
 @media (max-width: 768px) {
+  .shop-category-container {
+    width: min(100% - 24px, 1180px);
+  }
+
+  .info-container {
+    align-items: stretch;
+    flex-direction: column;
+    text-align: left;
+  }
+
   .product-container {
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Adjust number of columns */
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 170px), 1fr)); /* Adjust number of columns */
   }
 }
 
