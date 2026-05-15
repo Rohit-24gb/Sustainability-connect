@@ -14,6 +14,13 @@ The frontend is already deployed on Vercel:
 https://sus-app-eosin.vercel.app
 ```
 
+The backend and AI service are deployed on Render:
+
+```txt
+Backend API: https://sustainability-connect-api.onrender.com
+AI Service:  https://sustainability-connect-ai.onrender.com
+```
+
 ## Frontend
 
 Vercel is set up from the `sus-app` folder.
@@ -106,13 +113,13 @@ Render Key Value is included in `render.yaml` for Redis-compatible cache. Redis 
 
 ## Vercel After Backend Deploy
 
-Once Render gives you the backend URL, add it to the Vercel frontend:
+The Vercel frontend uses this production environment variable:
 
 ```txt
-REACT_APP_API_URL=https://your-render-backend-url.onrender.com
+REACT_APP_API_URL=https://sustainability-connect-api.onrender.com
 ```
 
-Then redeploy the Vercel frontend. This is the step that stops the live app from calling `http://localhost:4000`.
+This is the setting that stops the live app from calling `http://localhost:4000`.
 
 ## Local Docker Run
 

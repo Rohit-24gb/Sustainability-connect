@@ -8,7 +8,12 @@ The frontend is live here:
 https://sus-app-eosin.vercel.app
 ```
 
-The API services still need a hosted backend URL before every live feature can work end to end. Until then, the deployed frontend can load, but actions that call the API may fail because the app falls back to a local backend during development.
+The backend and AI service are live on Render:
+
+```txt
+Backend API: https://sustainability-connect-api.onrender.com
+AI Service:  https://sustainability-connect-ai.onrender.com
+```
 
 ## What Is Inside
 
@@ -118,6 +123,12 @@ The frontend is deployed on Vercel:
 
 ```txt
 https://sus-app-eosin.vercel.app
+```
+
+The Vercel production environment uses:
+
+```txt
+REACT_APP_API_URL=https://sustainability-connect-api.onrender.com
 ```
 
 Vercel project settings:
