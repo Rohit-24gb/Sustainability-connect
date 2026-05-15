@@ -1,0 +1,63 @@
+services:
+  - type: web
+    name: sustainability-connect-api
+    runtime: docker
+    rootDir: sus-app-backend
+    plan: free
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: CLIENT_URL
+        value: https://sus-app-eosin.vercel.app
+      - key: AI_SERVICE_URL
+        fromService:
+          type: web
+          name: sustainability-connect-ai
+          envVarKey: RENDER_EXTERNAL_URL
+      - key: MONGODB_URI
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
+      - key: JWT_REFRESH_SECRET
+        generateValue: true
+      - key: JWT_EXPIRES_IN
+        value: 15m
+      - key: JWT_REFRESH_EXPIRES_IN
+        value: 7d
+      - key: RAZORPAY_KEY_ID
+        sync: false
+      - key: RAZORPAY_KEY_SECRET
+        sync: false
+      - key: MAIL_USER
+        sync: false
+      - key: MAIL_PASS
+        sync: false
+      - key: MAIL_FROM
+        sync: false
+
+  - type: web
+    name: sustainability-connect-ai
+    runtime: docker
+    rootDir: ai-service
+    plan: free
+    healthCheckPath: /health
+    envVars:
+      - key: AI_SERVICE_NAME
+        value: Sustainability Connect AI Service
+      - key: MONGODB_URI
+        sync: false
+      - key: MONGODB_DB
+        value: sustainability
+      - key: RECOMMENDATION_LIMIT
+        value: 8
+      - key: SEARCH_LIMIT
+        value: 20
+
+  - type: keyvalue
+    name: sustainability-connect-cache
+    plan: free
+    maxmemoryPolicy: allkeys-lru
+    ipAllowList:
+      - source: 0.0.0.0/0
+        description: everywhere

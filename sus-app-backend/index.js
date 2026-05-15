@@ -116,9 +116,14 @@ app.use('/images', express.static('upload/images'));
 
 // Upload endpoint for products (add new product)
 app.post("/upload", upload.single('photos'), (req, res) => {
+  const publicBaseUrl =
+    process.env.PUBLIC_BASE_URL ||
+    process.env.RENDER_EXTERNAL_URL ||
+    `http://localhost:${port}`;
+
   res.json({
     success: 1,
-    image_url: `http://localhost:${port}/images/${req.file.filename}`
+    image_url: `${publicBaseUrl}/images/${req.file.filename}`
   });
 });
 

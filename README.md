@@ -37,6 +37,7 @@ docker-compose.yml
 - MongoDB Atlas for application data
 - Redis for cache/rate-limit foundations
 - Docker Compose for local multi-service setup
+- Render Blueprint for backend, AI service, and cache deployment
 - GitHub Actions for build checks
 - Vercel for the frontend deployment
 
@@ -127,6 +128,8 @@ Build command: CI=false npm run build
 Output directory: build
 ```
 
-The backend and AI service should be deployed separately on a Node/Python-friendly host such as Render, Railway, or AWS. After the backend is live, add its URL to Vercel as `REACT_APP_API_URL` and redeploy the frontend.
+The backend, AI service, and cache are described in `render.yaml` for Render. MongoDB should be created in MongoDB Atlas, then its connection string should be added to both Render services as `MONGODB_URI`.
+
+After the backend is live, add its URL to Vercel as `REACT_APP_API_URL` and redeploy the frontend.
 
 More notes are in [docs/deployment.md](docs/deployment.md).

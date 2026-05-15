@@ -1,10 +1,12 @@
 # Deployment Notes
 
-This project is split into three deployable parts:
+This project is split into a few deployable parts:
 
 - `sus-app` for the React frontend
 - `sus-app-backend` for the Express API
 - `ai-service` for recommendation and eco-score endpoints
+- MongoDB Atlas for the database
+- Render Key Value for Redis-compatible cache
 
 The frontend is already deployed on Vercel:
 
@@ -32,16 +34,26 @@ REACT_APP_API_URL=https://your-backend-domain
 
 Without this value, the frontend falls back to `http://localhost:4000`, which is only useful while developing locally.
 
+## Render Blueprint
+
+The repository includes `render.yaml` at the root. Use it from the Render dashboard to create:
+
+- `sustainability-connect-api`
+- `sustainability-connect-ai`
+- `sustainability-connect-cache`
+
+Render will ask for secret values marked with `sync: false`, especially `MONGODB_URI` and any payment/mail credentials you want enabled.
+
 ## Backend
 
-The Express API can be deployed on Render, Railway, AWS, or any host that supports Node.js services.
+The Express API is configured as a Render Docker web service.
 
 Use:
 
 ```txt
 Root directory: sus-app-backend
-Start command: npm start
-Port: 4000 or the platform-provided PORT
+Runtime: Docker
+Health check: /health
 ```
 
 Required environment variables:
@@ -55,7 +67,6 @@ RAZORPAY_KEY_ID
 RAZORPAY_KEY_SECRET
 MAIL_USER
 MAIL_PASS
-AI_SERVICE_URL
 ```
 
 Set `CLIENT_URL` to the Vercel frontend URL:
@@ -64,15 +75,18 @@ Set `CLIENT_URL` to the Vercel frontend URL:
 https://sus-app-eosin.vercel.app
 ```
 
+`AI_SERVICE_URL` is populated from the AI service in `render.yaml`.
+
 ## AI Service
 
-The FastAPI service can be deployed on Render, Railway, AWS, or another Python-friendly host.
+The FastAPI service is configured as a Render Docker web service.
 
 Use:
 
 ```txt
 Root directory: ai-service
-Start command: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+Runtime: Docker
+Health check: /health
 ```
 
 Required environment variables:
@@ -88,7 +102,17 @@ After this service is live, set the backend's `AI_SERVICE_URL` to the hosted AI 
 
 Use MongoDB Atlas for the database. Add the backend and AI service host IPs to Atlas Network Access, or use the host's recommended allowlist setup.
 
-Redis is included in Docker Compose for local development. In production, use a hosted Redis provider such as Upstash or Redis Cloud if the deployed backend needs cache, rate-limit, or queue behavior.
+Render Key Value is included in `render.yaml` for Redis-compatible cache. Redis is also included in Docker Compose for local development.
+
+## Vercel After Backend Deploy
+
+Once Render gives you the backend URL, add it to the Vercel frontend:
+
+```txt
+REACT_APP_API_URL=https://your-render-backend-url.onrender.com
+```
+
+Then redeploy the Vercel frontend. This is the step that stops the live app from calling `http://localhost:4000`.
 
 ## Local Docker Run
 
