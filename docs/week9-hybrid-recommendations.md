@@ -1,20 +1,10 @@
-# Week 9: Collaborative Filtering and Hybrid Ranking
+# Recommendation System
 
-Week 9 upgrades the recommendation system from only content-aware ranking to a true hybrid recommender.
+The recommendation flow combines product content, user behavior, and sustainability data. The goal is simple: show products that are relevant to the shopper and still favor better eco choices.
 
-## Goal
+## Signals Used
 
-Recommend products using both:
-
-- What this user/session personally interacted with
-- What similar users/sessions interacted with
-- Product sustainability quality
-- Product popularity
-- Product freshness
-
-## Data Source
-
-The recommender uses the `interactions` collection:
+The backend reads product and interaction data from MongoDB. User behavior comes from the `interactions` collection:
 
 ```js
 {
@@ -30,7 +20,7 @@ The recommender uses the `interactions` collection:
 }
 ```
 
-Weighted events:
+Events are converted into implicit feedback:
 
 ```txt
 view: 1
@@ -41,32 +31,13 @@ cart_remove: -2
 purchase: 8
 ```
 
-These weights convert raw behavior into implicit feedback. A purchase matters more than a view, while cart removal becomes a negative signal.
+A purchase carries more weight than a page view. Removing an item from the cart is treated as a negative signal.
 
-## Collaborative Filtering
+## How Ranking Works
 
-The system builds a user-product matrix:
+The recommender builds a user-product matrix from the interaction history, then compares users or sessions with cosine similarity. If two shoppers behave similarly, products liked by one shopper can become candidates for the other.
 
-```txt
-               productA  productB  productC
-user/session1      1         4         0
-user/session2      0         8         3
-user/session3      1         0         4
-```
-
-Then it computes cosine similarity between the current user/session vector and other user/session vectors.
-
-If another user has similar behavior, their positively weighted products become collaborative candidates.
-
-Example explanation:
-
-```txt
-Users with similar eco-shopping activity also interacted with this
-```
-
-## Hybrid Ranking Formula
-
-The final recommendation score is:
+Those collaborative candidates are mixed with product content and sustainability signals:
 
 ```txt
 Final Score =
@@ -77,59 +48,36 @@ Final Score =
 + 0.10 * freshness
 ```
 
-Signals:
+The individual signals mean:
 
-- `content_similarity`: category, product text, and price similarity to products the user interacted with
-- `collaborative_score`: products liked by similar users/sessions
-- `eco_score`: normalized sustainability score
-- `popularity`: global interaction strength
-- `freshness`: newer catalog items get a small boost
+```txt
+content_similarity   Product/category/price similarity
+collaborative_score  Interest from similar users or sessions
+eco_score            Sustainability score normalized for ranking
+popularity           Overall interaction strength
+freshness            Small boost for newer catalog items
+```
 
-## Backend Implementation
+## Backend Files
 
-Main file:
+Main backend implementation:
 
 ```txt
 sus-app-backend/controllers/recommendationController.js
 ```
 
-Endpoints:
+Routes:
 
 ```txt
 GET /api/recommendations/user/:userId
 GET /api/recommendations/session/:sessionId
 ```
 
-Response includes:
+The response includes ranking signals and readable reasons so the UI can explain why a product was recommended.
 
-```js
-{
-  recommendations: [
-    {
-      product,
-      recommendationScore,
-      rankingSignals: {
-        contentSimilarity,
-        collaborativeScore,
-        ecoScore,
-        popularity,
-        freshness
-      },
-      reasons
-    }
-  ],
-  meta: {
-    strategy: "hybrid-content-collaborative-eco",
-    formula: "0.35 content + 0.25 collaborative + 0.20 eco + 0.10 popularity + 0.10 freshness",
-    similarActors,
-    maxActorSimilarity
-  }
-}
-```
+## AI Service Files
 
-## FastAPI AI Service Implementation
-
-Main files:
+Main AI service implementation:
 
 ```txt
 ai-service/app/models/collaborative.py
@@ -143,21 +91,6 @@ Endpoint:
 POST /recommendations/{user_id}
 ```
 
-The AI service now fills the `collaborative_score` slot in the existing hybrid scorer.
+## Cold Start Behavior
 
-## Cold Start
-
-If the user has no interaction history:
-
-- The backend falls back to popularity + eco score.
-- The AI service falls back to high eco-score products.
-
-This keeps recommendations available for new users while still improving once behavior is collected.
-
-## Interview Talking Point
-
-You can say:
-
-```txt
-I implemented collaborative filtering using implicit feedback from user events. I build a user-product matrix from weighted interactions, compare users or sessions with cosine similarity, and recommend products that similar eco-shoppers interacted with. Then I combine the collaborative score with content similarity, eco score, popularity, and freshness using a hybrid ranking formula.
-```
+When a shopper has no interaction history yet, the system falls back to products with strong eco scores and general popularity. Once the shopper views, searches, adds, or buys products, the ranking becomes more personalized.

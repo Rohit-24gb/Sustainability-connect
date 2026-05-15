@@ -1,16 +1,98 @@
-# Week 8 Deployment Guide
+# Deployment Notes
 
-Sustainability Connect now has a deployable multi-service architecture:
+This project is split into three deployable parts:
 
-- React frontend
-- Express API gateway
-- FastAPI AI service
-- Redis cache/queue foundation
-- MongoDB Atlas database
+- `sus-app` for the React frontend
+- `sus-app-backend` for the Express API
+- `ai-service` for recommendation and eco-score endpoints
 
-## Local Docker Compose
+The frontend is already deployed on Vercel:
 
-Create local env files first:
+```txt
+https://sus-app-eosin.vercel.app
+```
+
+## Frontend
+
+Vercel is set up from the `sus-app` folder.
+
+```txt
+Root directory: sus-app
+Build command: CI=false npm run build
+Output directory: build
+```
+
+`sus-app/vercel.json` also includes a rewrite rule so React Router pages keep working after a refresh.
+
+Required production environment variable:
+
+```txt
+REACT_APP_API_URL=https://your-backend-domain
+```
+
+Without this value, the frontend falls back to `http://localhost:4000`, which is only useful while developing locally.
+
+## Backend
+
+The Express API can be deployed on Render, Railway, AWS, or any host that supports Node.js services.
+
+Use:
+
+```txt
+Root directory: sus-app-backend
+Start command: npm start
+Port: 4000 or the platform-provided PORT
+```
+
+Required environment variables:
+
+```txt
+MONGODB_URI
+JWT_SECRET
+JWT_REFRESH_SECRET
+CLIENT_URL
+RAZORPAY_KEY_ID
+RAZORPAY_KEY_SECRET
+MAIL_USER
+MAIL_PASS
+AI_SERVICE_URL
+```
+
+Set `CLIENT_URL` to the Vercel frontend URL:
+
+```txt
+https://sus-app-eosin.vercel.app
+```
+
+## AI Service
+
+The FastAPI service can be deployed on Render, Railway, AWS, or another Python-friendly host.
+
+Use:
+
+```txt
+Root directory: ai-service
+Start command: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+```
+
+Required environment variables:
+
+```txt
+MONGODB_URI
+MONGODB_DB
+```
+
+After this service is live, set the backend's `AI_SERVICE_URL` to the hosted AI service URL.
+
+## Database And Cache
+
+Use MongoDB Atlas for the database. Add the backend and AI service host IPs to Atlas Network Access, or use the host's recommended allowlist setup.
+
+Redis is included in Docker Compose for local development. In production, use a hosted Redis provider such as Upstash or Redis Cloud if the deployed backend needs cache, rate-limit, or queue behavior.
+
+## Local Docker Run
+
+Create local env files:
 
 ```powershell
 copy .env.example .env
@@ -18,112 +100,25 @@ copy sus-app-backend\.env.example sus-app-backend\.env
 copy ai-service\.env.example ai-service\.env
 ```
 
-Update both service `.env` files with a real MongoDB Atlas URI and secrets. The
-root `.env` only controls Docker Compose project name and exposed host ports.
-
-Run the stack:
+Run everything:
 
 ```powershell
 docker compose up --build
-```
-
-Stop the stack:
-
-```powershell
-docker compose down
 ```
 
 Services:
 
 ```txt
 Frontend:    http://localhost:3000
-Express API: http://localhost:4000
+Backend API: http://localhost:4000
 AI Service:  http://localhost:8000
 Redis:       localhost:6379
 ```
 
-Health checks:
+## Before Sharing Publicly
 
-```txt
-GET http://localhost:4000/health
-GET http://localhost:8000/health
-```
-
-## Production Recommendation
-
-Frontend:
-
-- Vercel or Netlify
-- Build command: `npm run build`
-- Publish directory: `build`
-- Env: `REACT_APP_API_URL=https://your-api-domain`
-
-Express API:
-
-- Render, Railway, or AWS ECS
-- Root directory: `sus-app-backend`
-- Start command: `npm start`
-- Required env vars:
-  - `MONGODB_URI`
-  - `JWT_SECRET`
-  - `JWT_REFRESH_SECRET`
-  - `CLIENT_URL`
-  - `RAZORPAY_KEY_ID`
-  - `RAZORPAY_KEY_SECRET`
-  - `MAIL_USER`
-  - `MAIL_PASS`
-
-FastAPI AI service:
-
-- Render, Railway, or AWS ECS
-- Root directory: `ai-service`
-- Start command: `uvicorn app.main:app --host 0.0.0.0 --port $PORT`
-- Required env vars:
-  - `MONGODB_URI`
-  - `MONGODB_DB`
-
-Redis:
-
-- Upstash Redis or Redis Cloud
-- Use for future caching, token blacklist, recommendation cache, and worker queues.
-
-MongoDB:
-
-- MongoDB Atlas
-- Add API and AI service deployment IPs to Atlas Network Access.
-- Use separate database users for production when possible.
-
-## CI/CD
-
-GitHub Actions workflow:
-
-```txt
-.github/workflows/ci.yml
-```
-
-It verifies:
-
-- Express API syntax
-- React production build
-- FastAPI Python compile
-- Docker Compose configuration
-- Docker image builds
-
-## Security Checklist Before Deployment
-
-- Remove tracked `.env` files from Git:
-
-```powershell
-git rm --cached sus-app-backend/.env
-git rm --cached ai-service/.env
-```
-
-- Rotate any secrets that were ever committed.
-- Keep only `.env.example` in Git.
-- Set real secrets in hosting provider dashboards.
-- Restrict MongoDB Atlas network access.
-- Use HTTPS domains in `CLIENT_URL` and `REACT_APP_API_URL`.
-
-## Interview Talking Point
-
-This phase containerized the full-stack AI marketplace using Docker Compose, added CI/CD validation with GitHub Actions, and documented production deployment across frontend, API gateway, AI microservice, MongoDB Atlas, and Redis.
+- Keep real `.env` files out of Git.
+- Rotate any secret that was ever committed by mistake.
+- Store production secrets in the hosting provider dashboard.
+- Use HTTPS URLs for `CLIENT_URL`, `REACT_APP_API_URL`, and `AI_SERVICE_URL`.
+- Check `GET /health` on the backend and AI service after deploying.

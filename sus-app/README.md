@@ -1,70 +1,55 @@
-# Getting Started with Create React App
+# Sustainability Connect Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is the React app for Sustainability Connect. It handles the storefront, product pages, cart, login/signup, orders, recycling center pages, and the community section.
 
-## Available Scripts
+Live site:
 
-In the project directory, you can run:
+```txt
+https://sus-app-eosin.vercel.app
+```
 
-### `npm start`
+## Run Locally
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+```powershell
+npm.cmd install
+npm.cmd start
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+The app runs at:
 
-### `npm test`
+```txt
+http://localhost:3000
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Build
 
-### `npm run build`
+```powershell
+npm.cmd run build
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+The production files are written to `build/`.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## API URL
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+The frontend reads the backend URL from:
 
-### `npm run eject`
+```txt
+REACT_APP_API_URL
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+For local development, it falls back to:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```txt
+http://localhost:4000
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+For Vercel, set `REACT_APP_API_URL` to the hosted backend URL and redeploy.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Vercel
 
-## Learn More
+This folder includes `vercel.json` with the production build command and React Router rewrite.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```txt
+Build command: CI=false npm run build
+Output directory: build
+```

@@ -1,50 +1,48 @@
-# Sustainability Connect AI
+# Sustainability Connect
 
-Sustainability Connect AI is a full-stack sustainable marketplace where users can discover eco-friendly products, search by intent, get recommendations, understand product impact, and track sustainability behavior.
+Sustainability Connect is a marketplace for eco-friendly products and recycling support. It brings together product browsing, cart and order flows, recycling center discovery, and recommendation features built around sustainable shopping behavior.
 
-## Architecture
-
-- React frontend in `sus-app`
-- Node.js Express API gateway in `sus-app-backend`
-- FastAPI AI microservice in `ai-service`
-- MongoDB Atlas for product, user, order, interaction, recommendation, and embedding data
-- Redis for cache, rate-limit/session foundations, and future worker queues
-- Docker Compose for local multi-service development
-- GitHub Actions for CI checks
-
-## Docker, CI/CD, Deployment
-
-This repo now includes:
-
-- Dockerfiles for frontend, backend, and AI service
-- `docker-compose.yml` for frontend, backend, AI service, Redis, and persistent upload/cache volumes
-- Optional local env loading from `sus-app-backend/.env` and `ai-service/.env`
-- Health checks for backend, AI service, and Redis
-- GitHub Actions workflow at `.github/workflows/ci.yml`
-- Deployment guide at `docs/deployment.md`
-
-##  Collaborative Filtering + Hybrid Ranking
-
-The recommendation engine now combines content-based ranking with collaborative filtering from the `interactions` collection.
-
-Hybrid formula:
+The frontend is live here:
 
 ```txt
-Final Score =
-  0.35 * content_similarity
-+ 0.25 * collaborative_score
-+ 0.20 * eco_score
-+ 0.10 * popularity
-+ 0.10 * freshness
+https://sus-app-eosin.vercel.app
 ```
 
-Collaborative filtering uses a user/session-product interaction matrix built from weighted events such as views, cart additions, purchases, wishlist actions, and cart removals. It compares users or sessions with cosine similarity and recommends products that similar eco-shoppers interacted with.
+The API services still need a hosted backend URL before every live feature can work end to end. Until then, the deployed frontend can load, but actions that call the API may fail because the app falls back to a local backend during development.
 
-See [docs/week9-hybrid-recommendations.md](docs/week9-hybrid-recommendations.md) for the interview explanation.
+## What Is Inside
+
+```txt
+sus-app/          React frontend
+sus-app-backend/  Express API, MongoDB models, auth, orders, payments, uploads
+ai-service/       FastAPI service for recommendations, search, and eco scoring
+docs/             Deployment notes and recommender details
+docker-compose.yml
+```
+
+## Main Features
+
+- Product catalog with category pages, search, cart, and order screens
+- User signup, login, OTP, and password reset flows
+- Recycling center listings and recyclable item information
+- Product recommendations using shopping activity and sustainability signals
+- Admin analytics routes for product and interaction data
+- Docker setup for running the frontend, backend, AI service, and Redis together
+
+## Tech Stack
+
+- React and Material UI for the frontend
+- Node.js, Express, and Mongoose for the API
+- FastAPI for AI/recommendation endpoints
+- MongoDB Atlas for application data
+- Redis for cache/rate-limit foundations
+- Docker Compose for local multi-service setup
+- GitHub Actions for build checks
+- Vercel for the frontend deployment
 
 ## Local Setup
 
-Create local env files:
+Create local environment files:
 
 ```powershell
 copy .env.example .env
@@ -52,74 +50,83 @@ copy sus-app-backend\.env.example sus-app-backend\.env
 copy ai-service\.env.example ai-service\.env
 ```
 
-Update the service env files with your real MongoDB Atlas URI, JWT secrets, payment keys, and mail credentials. The root `.env` controls Compose project name and host ports.
+Then update the backend and AI service env files with your MongoDB URI, JWT secrets, payment keys, and mail credentials.
 
-Run everything with Docker:
+Run the full stack with Docker:
 
 ```powershell
 docker compose up --build
 ```
 
-Default URLs:
+Local service URLs:
 
 ```txt
 Frontend:    http://localhost:3000
-Express API: http://localhost:4000
+Backend API: http://localhost:4000
 AI Service:  http://localhost:8000
 Redis:       localhost:6379
 ```
 
-Health endpoints:
+Health checks:
 
 ```txt
 GET http://localhost:4000/health
 GET http://localhost:8000/health
 ```
 
-## Useful Local Commands
+## Frontend Only
 
-Frontend build:
+For day-to-day frontend work:
+
+```powershell
+cd sus-app
+npm.cmd install
+npm.cmd start
+```
+
+To make the frontend talk to a hosted backend, set this environment variable before building or in Vercel:
+
+```txt
+REACT_APP_API_URL=https://your-backend-domain
+```
+
+## Useful Checks
 
 ```powershell
 cd sus-app
 npm.cmd run build
 ```
 
-Backend syntax check:
-
 ```powershell
 cd sus-app-backend
 node --check index.js
 ```
-
-AI service compile check:
 
 ```powershell
 cd ai-service
 python -m compileall app
 ```
 
-Docker Compose validation:
-
 ```powershell
 docker compose config
 ```
 
-## Production Targets
+## Deployment
 
-- Frontend: Vercel or Netlify
-- Express API: Render, Railway, or AWS ECS
-- FastAPI AI service: Render, Railway, or AWS ECS
-- MongoDB: MongoDB Atlas
-- Redis: Upstash Redis or Redis Cloud
-- CI/CD: GitHub Actions
-- Monitoring: Sentry, OpenTelemetry, Grafana/Prometheus
+The frontend is deployed on Vercel:
 
-See [docs/deployment.md](docs/deployment.md) for the full deployment checklist.
+```txt
+https://sus-app-eosin.vercel.app
+```
 
+Vercel project settings:
 
+```txt
+Root directory: sus-app
+Build command: CI=false npm run build
+Output directory: build
+```
 
-## Contact
+The backend and AI service should be deployed separately on a Node/Python-friendly host such as Render, Railway, or AWS. After the backend is live, add its URL to Vercel as `REACT_APP_API_URL` and redeploy the frontend.
 
-- rohitrajaksnd@gmail.com
-- suryakantmani28@gmail.com
+More notes are in [docs/deployment.md](docs/deployment.md).
